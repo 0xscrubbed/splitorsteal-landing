@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split or Steal — Launching March 22</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#c9a84c" />
+  <meta name="description" content="Split or Steal launches March 22. The dinner bill game where strategy beats generosity." />
+  <meta property="og:title" content="Split or Steal launches in days. Are you in?" />
+  <meta property="og:description" content="Everyone secretly picks Split or Steal. Nobody knows what the others chose. Then the bill reveals everything." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://splitsteal.app" />
+  <meta property="og:image" content="https://splitsteal.app/og-image-vc.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Split or Steal launches in days. Are you in?" />
+  <meta name="twitter:description" content="Everyone secretly picks Split or Steal. Nobody knows what the others chose. Then the bill reveals everything." />
+  <meta name="twitter:image" content="https://splitsteal.app/og-image-vc.webp" />
+  <meta name="twitter:site" content="@0xscrubbed" />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://pbs.twimg.com" crossorigin />
+  <link rel="preconnect" href="https://tally.so" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <!-- Preload hero background image (LCP candidate) — WebP only -->
+  <link rel="preload" href="/hero-young-couple.webp" as="image" fetchpriority="high" type="image/webp" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --text: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-dim: #606060;
+      --accent: #c9a44a;
+      --accent-bright: #e4c76b;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.12);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Viewport border frame */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      border: 1px solid rgba(201,164,74,0.08);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.5;
+    }
+
+    /* Full page wrapper with hero bg */
+    .page-wrapper {
+      flex: 1;
+      background: url('/hero-young-couple.webp') center top / cover no-repeat;
+      position: relative;
+    }
+
+    .page-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.75) 40%, rgba(5,5,5,0.95) 100%);
+      pointer-events: none;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    /* Launch pill */
+    .launch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1.2rem;
+      border: 1px solid rgba(201,164,74,0.3);
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      background: rgba(201,164,74,0.06);
+      margin-bottom: 2rem;
+      animation: pillGlow 3s ease-in-out infinite;
+    }
+
+    .launch-pill .dot {
+      width: 6px; height: 6px;
+      background: #ef4444;
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    @keyframes pillGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,164,74,0); }
+      50% { box-shadow: 0 0 20px rgba(201,164,74,0.15); }
+    }
+
+    /* Hero text */
+    .hero-text {
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+
+    .hero-text em {
+      font-style: italic;
+      color: var(--accent);
+      text-shadow: 0 0 60px rgba(201,164,74,0.25);
+    }
+
+    @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 3rem;
+    }
+
+    /* Countdown */
+    .countdown {
+      padding: 2.5rem 4rem;
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 20px;
+      background: rgba(201,164,74,0.03);
+      margin-bottom: 3rem;
+      width: 100%;
+      max-width: 480px;
+      animation: pillGlow 3s ease-in-out infinite;
+    }
+
+    .countdown-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .countdown-num {
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #f0d060 0%, #d4af37 50%, #a07830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: countdownPulse 2s ease-in-out infinite;
+    }
+
+    .countdown-sep {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: rgba(212, 175, 55, 0.25);
+      line-height: 1;
+      align-self: flex-start;
+      padding-top: 0.15em;
+    }
+
+    @keyframes countdownPulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.25); }
+    }
+
+    .countdown-sub-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    .countdown-live {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0d060, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: liveGlow 1.5s ease-in-out infinite;
+      display: none;
+    }
+
+    @keyframes liveGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+    }
+
+    /* ── iPhone frame carousel ── */
+    .screens-section {
+      width: 100%;
+      max-width: 860px;
+      margin-bottom: 3rem;
+    }
+
+    .screens-heading {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .screens-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.25rem;
+    }
+
+    .screen-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 155px;
+    }
+
+    .screen-wrap.center-wrap {
+      flex: 1;
+      max-width: 155px;
+    }
+
+    /* Realistic iPhone frame — pure CSS */
+    .iphone-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 393 / 852;
+      background: #111;
+      border-radius: 44px;
+      border: 2px solid #2a2a2a;
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 30px 60px rgba(0,0,0,0.6),
+        0 0 20px rgba(201,164,74,0.08);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .iphone-frame:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        0 55px 90px rgba(0,0,0,0.7),
+        0 0 30px rgba(201,164,74,0.15);
+    }
+
+    .screen-wrap.center-wrap .iphone-frame {
+      transform: translateY(-8px);
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        0 40px 80px rgba(0,0,0,0.7),
+        0 0 30px rgba(201,164,74,0.14);
+    }
+
+    .screen-wrap.center-wrap .iphone-frame:hover {
+      transform: translateY(-16px) scale(1.03);
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        0 65px 110px rgba(0,0,0,0.8),
+        0 0 40px rgba(201,164,74,0.18);
+    }
+
+    /* Dynamic Island */
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 4.5%;
+      background: #0a0a0a;
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    /* Home indicator */
+    .iphone-frame::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34%;
+      height: 4px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    .iphone-screen {
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .iphone-screen img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .screen-caption {
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 480px) {
+      .screens-row {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        padding: 0.5rem 1.5rem 1.5rem;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        gap: 1rem;
+      }
+      .screens-row::-webkit-scrollbar { display: none; }
+      .screen-wrap, .screen-wrap.center-wrap {
+        flex: 0 0 68vw;
+        max-width: 68vw;
+        scroll-snap-align: center;
+      }
+      .iphone-frame { border-radius: 38px; }
+      .iphone-screen { border-radius: 36px; }
+      .screen-wrap.center-wrap .iphone-frame { transform: none; }
+    }
+
+    /* Signup */
+    .signup-section {
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 1rem;
+      padding: 2rem 2rem;
+      border: 1px solid rgba(201,164,74,0.1);
+      border-radius: 16px;
+      background: rgba(201,164,74,0.02);
+    }
+
+    .signup-section iframe { border-radius: 12px; }
+
+    .signup-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .fine {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+    }
+
+    .built-by {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .built-by img {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,164,74,0.25);
+    }
+
+    .built-by a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.72rem;
+      transition: color 0.2s;
+    }
+
+    .built-by a:hover { color: var(--accent); }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .page { padding: 4rem 1.5rem 3rem; }
+      .countdown { padding: 1.5rem 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text { font-size: 3rem; }
+      .countdown-timer { gap: 0.4rem; }
+      .countdown-unit { min-width: 52px; }
+      .screens-row { gap: 0.75rem; }
+      .screen-caption { font-size: 0.65rem; }
+    }
+
+    /* ── UGC Video Section ── */
+    .ugc-section {
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    .ugc-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .ugc-header h2 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .ugc-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 0.5rem;
+    }
+
+    .ugc-row::-webkit-scrollbar { display: none; }
+
+    .ugc-item {
+      flex: 0 0 calc(33.333% - 0.7rem);
+      max-width: 200px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(201,164,74,0.06);
+      scroll-snap-align: center;
+      aspect-ratio: 9/16;
+      position: relative;
+    }
+
+    .ugc-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mute-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 15px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: background 0.2s;
+      padding: 0;
+    }
+
+    .mute-btn:hover {
+      background: rgba(0,0,0,0.85);
+    }
+
+    @media (max-width: 480px) {
+      .ugc-item { flex: 0 0 72vw; max-width: 72vw; }
+    }
+
+    /* ── Testimonials Section ── */
+    .testimonials-section {
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .testimonials-header h2 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .testimonial-card {
+      background: rgba(10,10,10,0.85);
+      padding: 1.75rem 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .testimonial-card:hover { background: rgba(255,255,255,0.02); }
+
+    .testimonial-quote {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.65;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 0.9rem;
+    }
+
+    .testimonial-handle {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="page-wrapper">
+  <div class="page">
+
+    <div class="launch-pill">
+      <span class="dot"></span>
+      LAUNCHING MARCH 22
+    </div>
+
+    <h1 class="hero-text">Split or<br><em>Steal.</em></h1>
+
+    <p class="hero-sub reveal">
+      Not credit card roulette — this is game theory. Everyone picks split or steal. Your outcome depends on your read of the room. Then the truth comes out.
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown reveal" id="countdown">
+      <div class="countdown-label">Launches in</div>
+      <div class="countdown-timer" id="countdown-timer">
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-days">00</div>
+          <div class="countdown-sub-label">Days</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-hours">00</div>
+          <div class="countdown-sub-label">Hours</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-mins">00</div>
+          <div class="countdown-sub-label">Mins</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-secs">00</div>
+          <div class="countdown-sub-label">Secs</div>
+        </div>
+      </div>
+      <div class="countdown-live" id="countdown-live">LIVE NOW</div>
+    </div>
+
+    <!-- App screenshots -->
+    <div class="screens-section reveal">
+      <div class="screens-heading">How it works</div>
+      <div class="screens-row">
+        <div class="screen-wrap">
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-home-dashboard.jpg" alt="Home dashboard — Total Saved and recent games" loading="lazy" />
+            </div>
+          </div>
+          <p class="screen-caption">Home</p>
+        </div>
+        <div class="screen-wrap">
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-new-game.jpg" alt="New Game setup — bill, players, Steal Tax" loading="lazy" />
+            </div>
+          </div>
+          <p class="screen-caption">Setup</p>
+        </div>
+        <div class="screen-wrap center-wrap">
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-join-game.jpg" alt="Join Game via QR or 6-digit code" loading="lazy" />
+            </div>
+          </div>
+          <p class="screen-caption">Join</p>
+        </div>
+        <div class="screen-wrap">
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-leaderboard.jpg" alt="Leaderboard with podium and rankings" loading="lazy" />
+            </div>
+          </div>
+          <p class="screen-caption">Rankings</p>
+        </div>
+        <div class="screen-wrap">
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-chaos-mode.jpg" alt="Chaos mode with Negotiation Window" loading="lazy" />
+            </div>
+          </div>
+          <p class="screen-caption">Chaos</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- UGC Videos — lazy loaded via IntersectionObserver -->
+    <div class="ugc-section reveal">
+      <div class="ugc-header">
+        <h2>Real Games. Real Reactions.</h2>
+      </div>
+      <div class="ugc-row">
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/sitting-in-car-ugc.mp4">
+            <source data-src="/assets/social/sitting-in-car-ugc.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/75-dollar-steak-UGC.mp4">
+            <source data-src="/assets/social/75-dollar-steak-UGC.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/first-date-UGC.mp4">
+            <source data-src="/assets/social/first-date-UGC.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials-section reveal">
+      <div class="testimonials-header">
+        <h2>What people are saying.</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I hit steal. My friend split. We haven't spoken since."</p>
+          <div class="testimonial-handle">@jake_m</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"This app genuinely changed how I think about dinner with new people."</p>
+          <div class="testimonial-handle">@tara.nz</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Finally something that makes the bill conversation interesting instead of awkward."</p>
+          <div class="testimonial-handle">@ryanc_sf</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"My group chat exploded after we played at Dan's birthday. Four steals, zero splits."</p>
+          <div class="testimonial-handle">@priya.v</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup -->
+    <div class="signup-section reveal">
+      <p class="signup-label">Be first in. Just your email.</p>
+      <iframe
+        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        width="100%"
+        height="120"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Split or Steal signup"
+      ></iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+    </div>
+
+    <p class="fine reveal">No spam. Just launch updates.</p>
+
+  </div>
+  </div>
+
+  <footer>
+    <div class="built-by">
+      <img src="https://pbs.twimg.com/profile_images/2030139648757178368/88IRnq4h_400x400.jpg" alt="0xscrubbed" loading="lazy" />
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">built by @0xscrubbed</a>
+    </div>
+    <p>&copy; 2026 Split or Steal</p>
+  </footer>
+
+  <!-- Scroll reveal + tracking -->
+  <script>
+    (function() {
+      var els = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      els.forEach(function(el) { observer.observe(el); });
+    })();
+
+    (function() {
+      var tracked = {};
+      var thresholds = [25, 50, 75, 100];
+      window.addEventListener('scroll', function() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        thresholds.forEach(function(t) {
+          if (pct >= t && !tracked[t]) {
+            tracked[t] = true;
+            if (window.posthog) posthog.capture('scroll_depth', { depth: t });
+          }
+        });
+      });
+
+      window.addEventListener('message', function(e) {
+        if (e.data && typeof e.data === 'object' && e.data.event === 'Tally.FormSubmitted') {
+          if (window.posthog) posthog.capture('tally_signup', { form_id: e.data.payload && e.data.payload.formId });
+        }
+      });
+    })();
+  </script>
+
+  <!-- Countdown Timer -->
+  <script>
+    (function() {
+      var launchDate = new Date('2026-03-22T00:00:00+11:00').getTime();
+      var daysEl = document.getElementById('cd-days');
+      var hoursEl = document.getElementById('cd-hours');
+      var minsEl = document.getElementById('cd-mins');
+      var secsEl = document.getElementById('cd-secs');
+      var timerEl = document.getElementById('countdown-timer');
+      var liveEl = document.getElementById('countdown-live');
+
+      function pad(n) { return n < 10 ? '0' + n : n; }
+
+      function update() {
+        var now = Date.now();
+        var diff = launchDate - now;
+        if (diff <= 0) {
+          timerEl.style.display = 'none';
+          liveEl.style.display = 'block';
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        daysEl.textContent = pad(d);
+        hoursEl.textContent = pad(h);
+        minsEl.textContent = pad(m);
+        secsEl.textContent = pad(s);
+      }
+
+      update();
+      setInterval(update, 1000);
+    })();
+  </script>
+
+  <script>
+    document.querySelectorAll('.mute-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var video = btn.previousElementSibling;
+        video.muted = !video.muted;
+        btn.textContent = video.muted ? '🔇' : '🔊';
+      });
+    });
+  </script>
+
+  <!-- Lazy-load UGC videos -->
+  <script>
+    (function() {
+      var videos = document.querySelectorAll('video[data-src]');
+      if (!videos.length) return;
+      var vObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var video = entry.target;
+          var src = video.getAttribute('data-src');
+          if (src) {
+            video.querySelectorAll('source[data-src]').forEach(function(s) {
+              s.src = s.getAttribute('data-src');
+            });
+            video.load();
+            video.play().catch(function(){});
+          }
+          vObs.unobserve(video);
+        });
+      }, { rootMargin: '200px' });
+      videos.forEach(function(v) { vObs.observe(v); });
+    })();
+  </script>
+
+  <!-- PostHog — end of body to avoid render-blocking -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_2CyexNFyBgqkiCAovHptGE97TsreyGi4eJD6JwWcaBS', {
+      api_host: 'https://splitsteal.app/ingest',
+      ui_host: 'https://us.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: true,
+      disable_session_recording: false,
+      session_recording: {
+        maskAllInputs: false,
+        maskInputOptions: { password: true },
+        recordCrossOriginIframes: false
+      },
+      enable_recording_console_log: true,
+      capture_performance: true,
+      capture_dead_clicks: true
+    });
+    posthog.capture('variant_view', { variant: 'C' });
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      var utmData = {};
+      utmKeys.forEach(function(k) { if (params.get(k)) utmData[k] = params.get(k); });
+      if (Object.keys(utmData).length && window.posthog) posthog.register(utmData);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split or Steal</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#c9a84c" />
+  <meta name="description" content="The dinner bill game where strategy beats generosity. Everyone picks. Nobody knows. Then the truth comes out." />
+  <meta property="og:title" content="Your dinner group has a freeloader. This proves it." />
+  <meta property="og:description" content="Everyone secretly picks Split or Steal. Nobody knows what the others chose. Then the bill reveals everything." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://splitsteal.app" />
+  <meta property="og:image" content="https://splitsteal.app/og-image-va.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Your dinner group has a freeloader. This proves it." />
+  <meta name="twitter:description" content="Everyone secretly picks Split or Steal. Nobody knows what the others chose. Then the bill reveals everything." />
+  <meta name="twitter:image" content="https://splitsteal.app/og-image-va.webp" />
+  <meta name="twitter:site" content="@0xscrubbed" />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://pbs.twimg.com" crossorigin />
+  <link rel="preconnect" href="https://tally.so" crossorigin />
+  <!-- Non-blocking font load: load as print, swap to all once loaded -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <!-- Preload hero background image (LCP candidate) — WebP only; all modern browsers support it -->
+  <link rel="preload" href="/hero-group-young.webp" as="image" fetchpriority="high" type="image/webp" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface-raised: #0f0f0f;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.12);
+      --text: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-dim: #707070;
+      --accent: #c9a44a;
+      --accent-glow: rgba(201,164,74,0.12);
+      --accent-bright: #e4c76b;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden; /* prevent horizontal scroll at root level */
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ── Utility ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── Viewport border frame ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      border: 1px solid rgba(201,164,74,0.08);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Animated grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* ── Section divider ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      background: url('/hero-group-young.webp') center center / cover no-repeat;
+    }
+
+    /* Dark overlay so text stays readable over hero image */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,5,0.65) 0%,
+        rgba(5,5,5,0.75) 40%,
+        rgba(5,5,5,0.92) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 1rem 0.35rem 0.65rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: blink 2.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent) 50%, #a07830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-secondary);
+      max-width: 420px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── Liquid CTA button ── */
+    .cta-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #000;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent), #b8933c);
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 62px;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent), #a07830, var(--accent-bright));
+      background-size: 300% 300%;
+      animation: liquidShift 4s ease-in-out infinite;
+      z-index: -1;
+      filter: blur(8px);
+      opacity: 0.4;
+    }
+
+    @keyframes liquidShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 32px rgba(201,164,74,0.2), 0 12px 40px rgba(0,0,0,0.5);
+    }
+
+    .cta-btn:active { transform: translateY(0) scale(0.98); }
+
+    .cta-btn .arrow { transition: transform 0.3s ease; }
+    .cta-btn:hover .arrow { transform: translateX(3px); }
+
+    .hero-fine {
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Scroll indicator ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .scroll-hint .line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--text-dim), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 0.8; transform: scaleY(1.2); }
+    }
+
+    /* ── Narrative section ── */
+    .narrative {
+      padding: 10rem 2rem;
+      position: relative;
+    }
+
+    .narrative-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .narrative h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .narrative p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .narrative p + p { margin-top: 1.5rem; }
+
+    .narrative .em {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── App Preview ── */
+    .app-preview {
+      padding: 8rem 2rem;
+      overflow: hidden;
+    }
+
+    .app-preview-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .app-preview-header .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .app-preview-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .app-preview-header p {
+      margin-top: 1rem;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    /* ── iPhone frame carousel ── */
+    .phone-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 2rem;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 220px;
+    }
+
+    .phone-wrap.center-wrap {
+      max-width: 220px;
+    }
+
+    /* Realistic iPhone frame — pure CSS, no images */
+    .iphone-frame {
+      position: relative;
+      width: 100%;
+      /* iPhone 15 Pro aspect ratio */
+      aspect-ratio: 393 / 852;
+      background: #111;
+      border-radius: 52px;
+      border: 2px solid #2a2a2a;
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 40px 80px rgba(0,0,0,0.65),
+        0 0 30px rgba(201,164,74,0.08);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .iphone-frame:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        0 60px 100px rgba(0,0,0,0.75),
+        0 0 40px rgba(201,164,74,0.15);
+    }
+
+    .phone-wrap.center-wrap .iphone-frame {
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        0 50px 90px rgba(0,0,0,0.7),
+        0 0 40px rgba(201,164,74,0.14);
+      transform: translateY(-16px);
+    }
+
+    .phone-wrap.center-wrap .iphone-frame:hover {
+      transform: translateY(-24px) scale(1.03);
+      box-shadow:
+        0 0 0 1px #0a0a0a,
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        0 70px 120px rgba(0,0,0,0.8),
+        0 0 50px rgba(201,164,74,0.18);
+    }
+
+    /* Dynamic Island cutout */
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 4.5%;
+      background: #0a0a0a;
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    /* Home indicator bar */
+    .iphone-frame::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34%;
+      height: 5px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    /* Screen area */
+    .iphone-screen {
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .iphone-screen img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .phone-caption {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .phone-row {
+        gap: 1.25rem;
+        overflow-x: auto;
+        overflow-y: visible;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        padding: 1rem 1.5rem 2rem;
+        scrollbar-width: none;
+        touch-action: pan-x;
+      }
+      .phone-row::-webkit-scrollbar { display: none; }
+      .phone-wrap, .phone-wrap.center-wrap {
+        flex: 0 0 68vw;
+        max-width: 68vw;
+        scroll-snap-align: center;
+      }
+      .phone-wrap.center-wrap .iphone-frame {
+        transform: none;
+      }
+      .iphone-frame {
+        border-radius: 44px;
+      }
+      .iphone-screen {
+        border-radius: 42px;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 1000px) {
+      .phone-wrap { max-width: 160px; }
+      .phone-wrap.center-wrap { max-width: 160px; }
+    }
+
+    /* ── Game flow cards ── */
+    .flow {
+      padding: 8rem 2rem;
+    }
+
+    .flow-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .flow-header .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .flow-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .flow-card {
+      background: var(--bg);
+      padding: 3rem 2rem;
+      position: relative;
+      transition: background 0.4s ease;
+    }
+
+    .flow-card:hover { background: rgba(255,255,255,0.02); }
+
+    .flow-card .num {
+      font-size: 4rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.05em;
+    }
+
+    .flow-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .flow-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── Outcomes ── */
+    .outcomes {
+      padding: 8rem 2rem;
+    }
+
+    .outcomes-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .outcomes-header .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .outcomes-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .outcomes-header p {
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .outcome-card {
+      padding: 2.5rem 2rem;
+      background: var(--bg);
+      text-align: center;
+      transition: background 0.4s ease;
+    }
+
+    .outcome-card:hover { background: rgba(255,255,255,0.02); }
+
+    .outcome-card .icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      opacity: 0.8;
+    }
+
+    .outcome-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .outcome-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── Testimonials ── */
+    .social-proof {
+      padding: 8rem 2rem;
+    }
+
+    .social-proof-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .quote-block {
+      position: relative;
+      padding: 2.5rem 0;
+    }
+
+    .quote-block + .quote-block {
+      border-top: 1px solid var(--border);
+    }
+
+    .quote-block p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    .quote-block .attribution {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    /* ── Pitch section ── */
+    .pitch {
+      padding: 8rem 2rem;
+    }
+
+    .pitch-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .pitch .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .pitch-point {
+      margin-bottom: 3rem;
+    }
+
+    .pitch-point h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .pitch-point p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Final CTA ── */
+    .final-cta {
+      padding: 10rem 2rem;
+      text-align: center;
+      position: relative;
+      background: url('/hero-group-young.webp') center center / cover no-repeat;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(5,5,5,0.82);
+      pointer-events: none;
+    }
+
+    .final-cta > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+      line-height: 1.05;
+    }
+
+    .final-cta .sub {
+      color: var(--text-secondary);
+      font-weight: 300;
+      font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .final-cta .tally-wrap {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .final-cta .tally-wrap iframe { border-radius: 12px; }
+
+    .final-cta .fine {
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.02em;
+    }
+
+    .built-by {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem 2rem 0;
+      text-align: center;
+    }
+
+    .built-by img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,168,67,0.3);
+    }
+
+    .built-by a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .built-by a:hover {
+      color: #d4a843;
+    }
+
+    /* ── Fade-in / scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered phone reveal */
+    .phone-reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+    }
+
+    .phone-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CTA pulse */
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 0 rgba(201,164,74,0.25); }
+      50% { box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 8px rgba(201,164,74,0); }
+    }
+
+    .cta-btn {
+      animation: ctaPulse 3s ease-in-out infinite;
+    }
+
+    /* Status pill glow */
+    @keyframes pillGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,164,74,0); border-color: rgba(201,164,74,0.35); }
+      50% { box-shadow: 0 0 12px rgba(201,164,74,0.18); border-color: rgba(201,164,74,0.6); }
+    }
+
+    /* ── Countdown Timer ── */
+    .countdown-section {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .countdown-inner {
+      display: inline-block;
+      padding: 2.5rem 4rem;
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 20px;
+      background: rgba(201,164,74,0.03);
+      min-width: 360px;
+    }
+
+    .countdown-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #d4af37;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .countdown-num {
+      font-size: clamp(2.4rem, 6vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #f0d060 0%, #d4af37 50%, #a07830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: countdownPulse 2s ease-in-out infinite;
+    }
+
+    .countdown-sep {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: rgba(212, 175, 55, 0.3);
+      line-height: 1;
+      align-self: flex-start;
+      padding-top: 0.1em;
+    }
+
+    @keyframes countdownPulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    .countdown-sub {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    .countdown-live {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0d060, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: liveGlow 1.5s ease-in-out infinite;
+      display: none;
+    }
+
+    @keyframes liveGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+    }
+
+    /* ── Floating feature labels ── */
+    .phone-wrap { position: relative; }
+
+    .float-label {
+      position: absolute;
+      padding: 0.35rem 0.8rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 8px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--accent-bright);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .float-label.tl { top: 12%; left: -16px; }
+    .float-label.tr { top: 18%; right: -20px; }
+    .float-label.br { bottom: 22%; right: -16px; }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .stats-row .dot {
+      width: 3px; height: 3px;
+      background: var(--text-dim);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── FAQ ── */
+    .faq { padding: 8rem 2rem; }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .faq-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .faq-list {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-q:hover { color: var(--accent-bright); }
+
+    .faq-q .chevron {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-q .chevron { transform: rotate(180deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.open .faq-a { max-height: 200px; }
+
+    .faq-a p {
+      padding: 0 0 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Launch pill ── */
+    .launch-pill {
+      display: inline-block;
+      background: rgba(201,164,74,0.12);
+      border: 1px solid rgba(201,164,74,0.35);
+      color: #c9a44a;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: pillGlow 3s ease-in-out infinite;
+    }
+
+    /* ── Hero h1 em ── */
+    .hero h1 em { font-style: italic; color: #c9a44a; }
+
+    /* ── Section pill ── */
+    .section-pill {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(201,164,74,0.6);
+      margin-bottom: 12px;
+    }
+
+    /* ── Ghost CTA ── */
+    .cta-ghost {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color 0.2s;
+      display: block;
+      margin: 12px auto 0;
+    }
+    .cta-ghost:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── Trust line ── */
+    .trust-line {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .flow-grid { grid-template-columns: 1fr; border-radius: 16px; }
+      .outcomes-grid { grid-template-columns: 1fr; border-radius: 16px; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .narrative { padding: 6rem 1.5rem; }
+      .flow { padding: 5rem 1.5rem; }
+      .outcomes { padding: 5rem 1.5rem; }
+      .social-proof { padding: 5rem 1.5rem; }
+      .pitch { padding: 5rem 1.5rem; }
+      .final-cta { padding: 6rem 1.5rem; }
+      .scroll-hint { display: none; }
+      .float-label { display: none; }
+      .stats-row { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .flow-card { padding: 2.5rem 1.75rem; }
+      .faq { padding: 5rem 1.5rem; }
+      .countdown-section { padding: 2rem 1.5rem; }
+      .countdown-inner { padding: 1.5rem 2rem; min-width: 0; width: 100%; }
+      .countdown-unit { min-width: 56px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 3.4rem; }
+      .cta-btn { padding: 0.9rem 2rem; font-size: 0.9rem; }
+      .countdown-timer { gap: 0.5rem; }
+      .countdown-unit { min-width: 48px; }
+    }
+
+    /* ── Roulette Section ── */
+    .roulette-section {
+      padding: 8rem 2rem;
+    }
+
+    .roulette-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .roulette-inner h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+
+    .roulette-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .roulette-callout {
+      padding: 1.75rem 2rem;
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 16px;
+      background: rgba(201,164,74,0.04);
+      margin-bottom: 2rem;
+    }
+
+    .roulette-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .roulette-callout p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .roulette-note {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .roulette-section { padding: 5rem 1.5rem; }
+    }
+
+    /* ── UGC Video Section ── */
+    .ugc-section {
+      padding: 8rem 2rem;
+    }
+
+    .ugc-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .ugc-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .ugc-row {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      max-width: 960px;
+      margin: 0 auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 0.5rem;
+    }
+
+    .ugc-row::-webkit-scrollbar { display: none; }
+
+    .ugc-item {
+      flex: 0 0 calc(33.333% - 0.85rem);
+      max-width: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(201,164,74,0.06);
+      scroll-snap-align: center;
+      aspect-ratio: 9/16;
+      position: relative;
+    }
+
+    .ugc-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mute-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 15px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: background 0.2s;
+      padding: 0;
+    }
+
+    .mute-btn:hover {
+      background: rgba(0,0,0,0.85);
+    }
+
+    @media (max-width: 768px) {
+      .ugc-section { padding: 5rem 0; }
+      .ugc-header { padding: 0 1.5rem; }
+      .ugc-row {
+        gap: 1rem;
+        padding: 0 1.5rem 1rem;
+        justify-content: flex-start;
+      }
+      .ugc-item {
+        flex: 0 0 72vw;
+        max-width: 72vw;
+      }
+    }
+
+    /* ── Testimonials Section ── */
+    .testimonials-section {
+      padding: 8rem 2rem;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s ease;
+    }
+
+    .testimonial-card:hover { background: rgba(255,255,255,0.02); }
+
+    .testimonial-quote {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-handle {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-section { padding: 5rem 1.5rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- PostHog and tracking moved to end of body to avoid render-blocking -->
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="launch-pill">🔴 PRE-LAUNCH · MARCH 22</div>
+
+    <h1>
+      Split or<br />
+      <span>Steal.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Everyone at the table picks secretly. Then all choices flip at once. One game. Zero awkward conversations.
+    </p>
+
+    <a href="#signup" class="cta-btn">
+      Find out who'd steal from you
+      <span class="arrow">&rarr;</span>
+    </a>
+
+    <button onclick="document.querySelector('.how-it-works, .game-flow, .flow').scrollIntoView({behavior:'smooth'})" class="cta-ghost">See how it works →</button>
+
+    <p class="hero-fine">Free to play. No card required. Just your group chat.</p>
+
+    <div class="stats-row">
+      <span>March 22 Launch</span>
+      <span class="dot"></span>
+      <span>Free to play</span>
+      <span class="dot"></span>
+      <span>30-second games</span>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- Countdown Timer -->
+  <section class="countdown-section" id="countdown">
+    <div class="countdown-inner">
+      <div class="countdown-label">Split or Steal launches in</div>
+      <div class="countdown-timer" id="countdown-timer">
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-days">00</div>
+          <div class="countdown-sub">Days</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-hours">00</div>
+          <div class="countdown-sub">Hours</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-mins">00</div>
+          <div class="countdown-sub">Mins</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-secs">00</div>
+          <div class="countdown-sub">Secs</div>
+        </div>
+      </div>
+      <div class="countdown-live" id="countdown-live">LIVE NOW</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Narrative -->
+  <section class="narrative">
+    <div class="narrative-inner reveal">
+      <div class="section-pill">THE PROBLEM</div>
+      <h2>One person at every dinner underpays. <em>Everyone knows who.</em></h2>
+      <p>
+        Every group has one. The person who orders the lobster and Venmos you for the salad. The one who "forgot their wallet." The one who always needs to "get you next time."
+      </p>
+      <p>
+        You've never said anything. <span class="em">Now you don't have to.</span>
+      </p>
+      <p>
+        Split or Steal turns the dinner bill into a game — based on actual game theory. No more passive-aggression. No more mental math. Just one choice: <span class="em">are you honest, or are you brave?</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- How it works -->
+  <!-- App Preview -->
+  <section class="app-preview">
+    <div class="container">
+      <div class="app-preview-header reveal">
+        <div class="section-pill">THE APP</div>
+        <h2>See what happens at the table.</h2>
+        <p>Make your move. Then watch the room.</p>
+      </div>
+      <div class="phone-row">
+        <div class="phone-wrap phone-reveal" style="--delay: 0s">
+          <div class="float-label tl">Dashboard</div>
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-home-dashboard.jpg" alt="Home dashboard — Total Saved and recent games" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone-caption">Home</div>
+        </div>
+        <div class="phone-wrap phone-reveal" style="--delay: 0.1s">
+          <div class="float-label tl">New Game</div>
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-new-game.jpg" alt="New Game setup — bill, players, Steal Tax" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone-caption">Setup</div>
+        </div>
+        <div class="phone-wrap center-wrap phone-reveal" style="--delay: 0.2s">
+          <div class="float-label tr">Real Stakes</div>
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-join-game.jpg" alt="Join Game via QR or 6-digit code" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone-caption">Join</div>
+        </div>
+        <div class="phone-wrap phone-reveal" style="--delay: 0.3s">
+          <div class="float-label br">Leaderboard</div>
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-leaderboard.jpg" alt="Leaderboard with podium and rankings" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone-caption">Rankings</div>
+        </div>
+        <div class="phone-wrap phone-reveal" style="--delay: 0.4s">
+          <div class="float-label br">Chaos Mode</div>
+          <div class="iphone-frame">
+            <div class="iphone-screen">
+              <img src="/screenshots/mockup-chaos-mode.jpg" alt="Chaos mode with Negotiation Window and QR share" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone-caption">Chaos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="flow">
+    <div class="container">
+      <div class="flow-header reveal">
+        <div class="section-pill">HOW IT WORKS</div>
+        <h2>Three moves. One reveal.</h2>
+      </div>
+
+      <div class="flow-grid reveal">
+        <div class="flow-card">
+          <div class="num">01</div>
+          <h3>Start a round</h3>
+          <p>Enter the bill. Share a link or QR code. Everyone at the table joins in ten seconds flat.</p>
+        </div>
+        <div class="flow-card">
+          <div class="num">02</div>
+          <h3>Make your choice</h3>
+          <p>Split: pay your fair share. Steal: try to dodge the bill. Nobody sees what you picked until it's too late.</p>
+        </div>
+        <div class="flow-card">
+          <div class="num">03</div>
+          <h3>Watch it unfold</h3>
+          <p>All choices flip at once. Splitters pay fair. Stealers pay nothing. If everyone steals, one random person covers the lot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Outcomes -->
+  <section class="outcomes">
+    <div class="container">
+      <div class="outcomes-header reveal">
+        <div class="section-pill">WHAT HAPPENS AT THE TABLE</div>
+        <h2>Three scenarios. Infinite drama.</h2>
+        <p>Real stakes. Real consequences. Real group chat meltdowns.</p>
+      </div>
+
+      <div class="outcomes-grid reveal">
+        <div class="outcome-card">
+          <span class="icon">&#9878;</span>
+          <h3>Everyone splits</h3>
+          <p>Bill divided evenly. Faith in humanity restored. Boring, but noble.</p>
+        </div>
+        <div class="outcome-card">
+          <span class="icon">&#9876;</span>
+          <h3>Someone steals</h3>
+          <p>They pay nothing. Everyone else covers their share. The table goes silent.</p>
+        </div>
+        <div class="outcome-card">
+          <span class="icon">&#9760;</span>
+          <h3>Everyone steals</h3>
+          <p>Nobody wins. The app picks one person at random to cover the entire bill. Maximum chaos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Roulette Section -->
+  <section class="roulette-section">
+    <div class="container">
+      <div class="roulette-inner reveal">
+        <div class="section-pill">NOT CREDIT CARD ROULETTE</div>
+        <h2>Credit card roulette is luck.<br>This is <em>strategy.</em></h2>
+        <p class="roulette-sub">
+          Credit card roulette outsources the outcome to chance. Nobody thinks, nobody decides — you just spin and hope. Split or Steal is different. Every outcome is the direct result of what you chose.
+        </p>
+        <div class="roulette-callout">
+          <span class="roulette-label">The key difference</span>
+          <p>
+            Your outcome depends on your read of the room. If you pick steal and everyone else cooperates, you win. If everyone defects, one person gets picked at random — and it might be you. That's not luck. That's game theory.
+          </p>
+        </div>
+        <p class="roulette-note">
+          Unlike credit card roulette, Split or Steal makes everyone accountable. You control your fate — until you don't. The prisoner's dilemma applied to your dinner bill.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Social proof -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <div class="quote-block reveal">
+        <p>"I picked steal. So did my best mate. The app randomly chose one of us to cover the whole bill. Guess who."</p>
+        <div class="attribution">Beta tester, Sydney</div>
+      </div>
+      <div class="quote-block reveal">
+        <p>"The person who always underpays finally got exposed. In front of everyone. I didn't have to say a single word."</p>
+        <div class="attribution">Beta tester, Melbourne</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Pitch -->
+  <section class="pitch">
+    <div class="pitch-inner">
+      <div class="section-pill reveal">WHY IT WORKS</div>
+
+      <div class="pitch-point reveal">
+        <h3>The threat is the feature</h3>
+        <p>Nobody wants to be exposed as the table freeloader. The mere existence of the reveal keeps people honest — or makes them gamble.</p>
+      </div>
+
+      <div class="pitch-point reveal">
+        <h3>Drama without confrontation</h3>
+        <p>You never have to say "you didn't pay enough." The app says it for you. With receipts.</p>
+      </div>
+
+      <div class="pitch-point reveal">
+        <h3>Reputations carry over</h3>
+        <p>Repeated games create real stakes. Your friends will remember the time you stole. You will remember the time they didn't.</p>
+      </div>
+
+      <div class="pitch-point reveal">
+        <h3>Every game is content</h3>
+        <p>"3 of your 5 friends tried to steal" — the shareable results card writes the group chat message for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-header reveal">
+        <div class="section-pill">FAQ</div>
+        <h2>Questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Is this a real payments app?
+            <span class="chevron">&#9662;</span>
+          </button>
+          <div class="faq-a">
+            <p>Split or Steal is a game that sits on top of your existing payment methods. It decides who owes what — you settle through Apple Pay, Venmo, or whatever your group uses.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            What if someone just always steals?
+            <span class="chevron">&#9662;</span>
+          </button>
+          <div class="faq-a">
+            <p>Repeated games create reputations. Your steal history follows you. If you always steal, your friends will know — and they'll adjust their strategy accordingly.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            How many people can play?
+            <span class="chevron">&#9662;</span>
+          </button>
+          <div class="faq-a">
+            <p>2 to 12 players per game. Works best with 3-6 — the sweet spot for maximum social pressure.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            Is it free?
+            <span class="chevron">&#9662;</span>
+          </button>
+          <div class="faq-a">
+            <p>Free to play. We'll never charge for the core game. Premium features (custom rules, tournament modes) will come later.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            When does it launch?
+            <span class="chevron">&#9662;</span>
+          </button>
+          <div class="faq-a">
+            <p>March 22, 2026. Sign up for early access and you'll be first in.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- UGC Videos — lazy loaded via IntersectionObserver to avoid blocking page load -->
+  <section class="ugc-section reveal">
+    <div class="container">
+      <div class="ugc-header">
+        <div class="section-pill">REAL GAMES</div>
+        <h2>Real Games. Real Reactions.</h2>
+      </div>
+      <div class="ugc-row">
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/sitting-in-car-ugc.mp4">
+            <source data-src="/assets/social/sitting-in-car-ugc.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/75-dollar-steak-UGC.mp4">
+            <source data-src="/assets/social/75-dollar-steak-UGC.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+        <div class="ugc-item">
+          <video muted loop playsinline preload="none" data-src="/assets/social/first-date-UGC.mp4">
+            <source data-src="/assets/social/first-date-UGC.mp4" type="video/mp4" />
+          </video>
+          <button class="mute-btn" aria-label="Toggle mute">🔇</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section reveal">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-pill">EARLY USERS</div>
+        <h2>What people are saying.</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I hit steal. My friend split. We haven't spoken since."</p>
+          <div class="testimonial-handle">@jake_m</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"This app genuinely changed how I think about dinner with new people."</p>
+          <div class="testimonial-handle">@tara.nz</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Finally something that makes the bill conversation interesting instead of awkward."</p>
+          <div class="testimonial-handle">@ryanc_sf</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"My group chat exploded after we played at Dan's birthday. Four steals, zero splits."</p>
+          <div class="testimonial-handle">@priya.v</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="signup">
+    <h2 class="reveal">Find out who'd steal from you.</h2>
+    <p class="sub reveal">Spots are limited. Be on the list before someone steals yours.</p>
+
+    <div class="tally-wrap reveal">
+      <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.75rem;letter-spacing:0.02em;">just your email. that's it.</p>
+      <iframe
+        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        width="100%"
+        height="120"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Split or Steal signup"
+      ></iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+      <p class="trust-line">Join 400+ already on the list. No spam. No BS.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="built-by">
+      <img src="https://pbs.twimg.com/profile_images/2030139648757178368/88IRnq4h_400x400.jpg" alt="0xscrubbed" loading="lazy" />
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">built by @0xscrubbed</a>
+    </div>
+    <p style="margin-top: 1rem;">&copy; 2026 Split or Steal</p>
+  </footer>
+
+  <!-- Scroll reveal + tracking -->
+  <script>
+    (function() {
+      var els = document.querySelectorAll('.reveal, .phone-reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      els.forEach(function(el) { observer.observe(el); });
+    })();
+
+    (function() {
+      var tracked = {};
+      var thresholds = [25, 50, 75, 100];
+      window.addEventListener('scroll', function() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h <= 0) return;
+        var pct = Math.round((window.scrollY / h) * 100);
+        thresholds.forEach(function(t) {
+          if (pct >= t && !tracked[t]) {
+            tracked[t] = true;
+            if (window.posthog) posthog.capture('scroll_depth', { depth: t });
+          }
+        });
+      });
+
+      window.addEventListener('message', function(e) {
+        if (e.data && typeof e.data === 'object' && e.data.event === 'Tally.FormSubmitted') {
+          if (window.posthog) posthog.capture('tally_signup', { form_id: e.data.payload && e.data.payload.formId });
+        }
+      });
+
+      document.querySelector('.cta-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#signup').scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
+  </script>
+
+  <!-- Countdown Timer Script -->
+  <script>
+    (function() {
+      var launchDate = new Date('2026-03-23T02:00:00Z').getTime();
+      var daysEl = document.getElementById('cd-days');
+      var hoursEl = document.getElementById('cd-hours');
+      var minsEl = document.getElementById('cd-mins');
+      var secsEl = document.getElementById('cd-secs');
+      var timerEl = document.getElementById('countdown-timer');
+      var liveEl = document.getElementById('countdown-live');
+
+      function pad(n) { return n < 10 ? '0' + n : n; }
+
+      function update() {
+        var now = Date.now();
+        var diff = launchDate - now;
+        if (diff <= 0) {
+          timerEl.style.display = 'none';
+          liveEl.style.display = 'block';
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        daysEl.textContent = pad(d);
+        hoursEl.textContent = pad(h);
+        minsEl.textContent = pad(m);
+        secsEl.textContent = pad(s);
+      }
+
+      update();
+      setInterval(update, 1000);
+    })();
+  </script>
+
+  <script>
+    document.querySelectorAll('.mute-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var video = btn.previousElementSibling;
+        video.muted = !video.muted;
+        btn.textContent = video.muted ? '🔇' : '🔊';
+      });
+    });
+  </script>
+
+  <!-- Lazy-load UGC videos: only load src when video enters viewport -->
+  <script>
+    (function() {
+      var videos = document.querySelectorAll('video[data-src]');
+      if (!videos.length) return;
+      var vObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          var video = entry.target;
+          var src = video.getAttribute('data-src');
+          if (src) {
+            video.querySelectorAll('source[data-src]').forEach(function(s) {
+              s.src = s.getAttribute('data-src');
+            });
+            video.load();
+            video.play().catch(function(){});
+          }
+          vObs.unobserve(video);
+        });
+      }, { rootMargin: '200px' });
+      videos.forEach(function(v) { vObs.observe(v); });
+    })();
+  </script>
+
+  <!-- PostHog — deferred to end of body to avoid render-blocking -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_2CyexNFyBgqkiCAovHptGE97TsreyGi4eJD6JwWcaBS', {
+      api_host: 'https://splitsteal.app/ingest',
+      ui_host: 'https://us.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: true,
+      disable_session_recording: false,
+      session_recording: {
+        maskAllInputs: false,
+        maskInputOptions: { password: true },
+        recordCrossOriginIframes: false
+      },
+      enable_recording_console_log: true,
+      capture_performance: true,
+      capture_dead_clicks: true
+    });
+    posthog.capture('variant_view', { variant: 'A' });
+
+    // Cross-domain linking
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var phCid = params.get('ph_cid');
+      if (phCid && window.posthog) {
+        posthog.identify(phCid);
+        posthog.capture('cross_domain_link', {
+          source_domain: '0xscrubbed.xyz',
+          ph_session_id: params.get('ph_sid') || null
+        });
+      }
+    })();
+
+    // UTM registration
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      var utmData = {};
+      utmKeys.forEach(function(k) { if (params.get(k)) utmData[k] = params.get(k); });
+      if (Object.keys(utmData).length && window.posthog) posthog.register(utmData);
+    })();
+  </script>
+
+</body>
+</html>
