@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /webhook/
+Disallow: /ingest/
+
+Sitemap: https://splitsteal.app/sitemap.xml
