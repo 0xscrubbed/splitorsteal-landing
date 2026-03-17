@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Clarity — AI implementation for Australian small businesses</title>
+  <meta name="description" content="AI implementation for Australian small businesses — no jargon, just results. We install working AI systems in days." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/ai-clarity/variant-c.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Clarity — No jargon. Just results." />
+  <meta property="og:description" content="AI implementation for Australian small businesses. Working systems in days, not months." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/ai-clarity/variant-c.html" />
+  <meta property="og:site_name" content="AI Clarity" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Clarity — No jargon. Just results." />
+  <meta name="twitter:description" content="AI implementation for Australian small businesses." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"AI Clarity","description":"AI implementation for Australian small businesses. Working systems in days, not months.","url":"https://0xscrubbed.xyz/ideas/ai-clarity/","areaServed":"AU","provider":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A1A0F;
+      --text: #d4ead8;
+      --text-muted: #5a7a62;
+      --accent: #10B981;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --accent-dim: rgba(16, 185, 129, 0.08);
+      --border: rgba(16, 185, 129, 0.12);
+      --success: #34d399;
+      --radius: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Cinematic background */
+    .bg-layer {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0,180,216,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0,100,180,0.08) 0%, transparent 60%);
+    }
+    .grid-lines {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,180,216,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,216,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Layout */
+    main { position: relative; z-index: 1; }
+
+    /* Nav — minimal */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .logo-text {
+      font-size: 0.95rem; letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    .logo-text span:first-child { font-weight: 100; color: var(--accent); }
+    .logo-text span:last-child { font-weight: 900; }
+
+    /* Cinematic hero */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 680px; margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 2rem; opacity: 0.8;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 400; font-style: italic;
+      line-height: 1.2; letter-spacing: -0.01em;
+      color: var(--text); margin-bottom: 2rem;
+    }
+    .hero h1 strong {
+      font-style: normal; font-weight: 800;
+      color: #fff;
+    }
+
+    .hero p.lead {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted); line-height: 1.75;
+      margin-bottom: 3rem; max-width: 480px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Minimal form */
+    .capture-wrap { max-width: 380px; }
+    .inline-form {
+      display: flex; gap: 0;
+      border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; background: rgba(10,22,40,0.8);
+      backdrop-filter: blur(8px);
+    }
+    .inline-form input[type="email"] {
+      flex: 1; padding: 0.9rem 1rem;
+      border: none; background: transparent;
+      color: var(--text); font-size: 0.95rem;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      outline: none;
+    }
+    .inline-form input::placeholder { color: var(--text-muted); }
+    .inline-form button {
+      padding: 0.9rem 1.25rem;
+      border: none; border-left: 1px solid var(--border);
+      background: var(--accent); color: #0A1A0F;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .inline-form button:hover { background: #0fcc8e; }
+
+    .form-caption {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.72rem; color: var(--text-muted);
+      margin-top: 0.75rem; letter-spacing: 0.02em;
+    }
+
+    /* Success */
+    .form-success {
+      display: none;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--success); font-size: 1.05rem; font-weight: 600;
+      padding: 1rem 0;
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 680px; margin: 0 auto;
+      border: none; border-top: 1px solid var(--border);
+    }
+
+    /* Details section */
+    .details {
+      max-width: 680px; margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .details-label {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .details-list { list-style: none; }
+    .details-list li {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 1rem;
+    }
+    .details-list li:last-child { border-bottom: none; }
+    .details-list li::before {
+      content: '—';
+      color: var(--accent); flex-shrink: 0;
+      font-weight: 300; opacity: 0.6;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 680px; margin: 0 auto;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.75rem; color: var(--text-muted);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="grid-lines" aria-hidden="true"></div>
+
+  <nav>
+    <a class="logo" href="/ideas/ai-clarity/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="2" fill="#10B981"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+        <path d="M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M5.64 18.36l2.12-2.12M16.24 7.76l2.12-2.12" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        <path d="M9 12h6M12 9v6" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text"><span>AI</span><span>Clarity</span></div>
+    </a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-bottom:2.5rem;">
+        <svg width="52" height="52" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="28" cy="28" r="26" stroke="#10B981" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
+          <path d="M28 14 C20 14 14 19 14 26 C14 30 16 33 19 35 C20 36 20 38 19 39 L22 39 C22 38 22 36 21 35 C19 33 17 30 17 26 C17 20.5 22 17 28 17" stroke="#10B981" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M28 14 C36 14 42 19 42 26 C42 30 40 33 37 35 C36 36 36 38 37 39 L34 39 C34 38 34 36 35 35 C37 33 39 30 39 26 C39 20.5 34 17 28 17" stroke="#10B981" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="28" y1="14" x2="28" y2="39" stroke="#10B981" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.5"/>
+          <circle cx="28" cy="28" r="3" fill="#10B981"/>
+          <circle cx="19" cy="24" r="2" fill="#10B981" opacity="0.7"/>
+          <circle cx="37" cy="24" r="2" fill="#10B981" opacity="0.7"/>
+          <circle cx="21" cy="32" r="1.5" fill="#10B981" opacity="0.5"/>
+          <circle cx="35" cy="32" r="1.5" fill="#10B981" opacity="0.5"/>
+          <line x1="19" y1="24" x2="28" y2="28" stroke="#10B981" stroke-width="1" opacity="0.5"/>
+          <line x1="37" y1="24" x2="28" y2="28" stroke="#10B981" stroke-width="1" opacity="0.5"/>
+          <line x1="21" y1="32" x2="28" y2="28" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+          <line x1="35" y1="32" x2="28" y2="28" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+          <circle cx="28" cy="28" r="1.5" fill="#fff" opacity="0.8"/>
+        </svg>
+        <h1 class="logo-wordmark" style="font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;color:#fff;line-height:1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+          <span style="color:#10B981;font-weight:200;">AI</span>Clarity
+        </h1>
+      </div>
+      <p class="eyebrow">AI implementation &bull; Australia</p>
+
+      <h1>
+        <strong>Working AI systems</strong><br>
+        for the businesses<br>
+        that don't have time<br>
+        <em>to figure it out.</em>
+      </h1>
+
+      <p class="lead">
+        AI implementation for Australian small businesses — no jargon, just results.
+        We assess, build, and deploy. You keep running your business.
+      </p>
+
+      <div class="capture-wrap">
+        <form class="inline-form" id="form-hero" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="idea_slug" value="ai-clarity" />
+          <input type="hidden" name="variant" value="c" />
+          <input type="hidden" name="utm_source" value="lander" />
+          <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+          <button type="submit" id="btn-hero">Book a consult</button>
+        </form>
+        <div class="form-success" id="success-hero">You're on the list.</div>
+        <p class="form-caption">Free 30-min consultation. No obligation.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="details">
+      <p class="details-label">What's included</p>
+      <ul class="details-list">
+        <li>Free 30-minute operations audit — identify your biggest AI opportunity</li>
+        <li>Fixed-price implementation — no hourly billing, no scope creep</li>
+        <li>Done-for-you build — we handle vendor selection, integration, and testing</li>
+        <li>Live in 14 days or less — not a 6-month consulting engagement</li>
+        <li>30-day support included — we stay until it works, then hand off cleanly</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>AI implementation for Australian small businesses</span>
+    <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">@0xscrubbed</a>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      var form = document.getElementById('form-hero');
+      var btn = document.getElementById('btn-hero');
+      var success = document.getElementById('success-hero');
+      btn.disabled = true;
+      btn.textContent = '...';
+      var fd = new FormData(form);
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('utm_campaign')) fd.append('utm_campaign', params.get('utm_campaign'));
+      if (params.get('utm_medium')) fd.append('utm_medium', params.get('utm_medium'));
+      fetch('https://capture.0xscrubbed.xyz/signup', { method: 'POST', body: fd })
+        .catch(function() {})
+        .finally(function() {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+    }
+  </script>
+
+</body>
+</html>

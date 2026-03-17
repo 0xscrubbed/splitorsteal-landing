@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Clarity — Australian Small Businesses Are Being Left Behind</title>
+  <meta name="description" content="82% of Australian SMBs say they want to use AI. Less than 9% have actually implemented anything that works. AI Clarity closes the gap — done-for-you AI implementation with real results." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/ai-clarity/variant-b.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Clarity — Your Competitors Are Already Using AI" />
+  <meta property="og:description" content="Done-for-you AI implementation for Australian small businesses. No jargon, no wasted budget. Just working systems." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/ai-clarity/variant-b.html" />
+  <meta property="og:site_name" content="AI Clarity" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Clarity — Your Competitors Are Already Using AI" />
+  <meta name="twitter:description" content="Done-for-you AI implementation for Australian small businesses." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"AI Clarity","description":"Done-for-you AI implementation for Australian small businesses. No jargon, no wasted budget. Just working systems installed in days.","url":"https://0xscrubbed.xyz/ideas/ai-clarity/","areaServed":"AU","provider":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz","address":{"@type":"PostalAddress","addressCountry":"AU"}}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does AI Clarity actually do?","acceptedAnswer":{"@type":"Answer","text":"We assess your operations, identify the highest-ROI automation opportunities, then build and deploy the AI systems for you. You get working tools, not slide decks."}},{"@type":"Question","name":"How long does implementation take?","acceptedAnswer":{"@type":"Answer","text":"Most engagements go live within 5 to 14 business days depending on complexity. We move fast by design."}},{"@type":"Question","name":"Do I need any technical knowledge?","acceptedAnswer":{"@type":"Answer","text":"None. We handle everything from vendor selection to integration to testing. You just tell us what's costing you the most time and money."}}]}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A1628;
+      --bg-card: #0d1e38;
+      --bg-card-hover: #112240;
+      --text: #e8eef6;
+      --text-muted: #7a96b8;
+      --accent: #00B4D8;
+      --accent-glow: rgba(0, 180, 216, 0.2);
+      --accent-hover: #00cef8;
+      --success: #00e5a0;
+      --border: #1a2e4a;
+      --radius: 12px;
+      --max-width: 760px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 22, 40, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--text); font-weight: 700; font-size: 1rem;
+    }
+    .nav-cta {
+      padding: 0.45rem 1.2rem;
+      background: var(--accent); color: #0A1628;
+      border: none; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* Problem hero */
+    .hero-problem {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-problem::before {
+      content: '';
+      position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero-problem > * { position: relative; z-index: 1; }
+
+    .problem-tag {
+      display: inline-block;
+      background: rgba(255,80,80,0.12);
+      color: #ff6b6b;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.35em 1em; border-radius: 100px;
+      border: 1px solid rgba(255,80,80,0.25);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-problem h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 800; line-height: 1.12; letter-spacing: -0.03em;
+      max-width: 700px; margin-bottom: 1.5rem;
+    }
+    .hero-problem h1 em {
+      font-style: normal; color: var(--accent);
+    }
+
+    .stat-row {
+      display: flex; gap: 1.5rem; margin-bottom: 2.5rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .stat-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem; text-align: center; min-width: 140px;
+    }
+    .stat-item .stat-num {
+      font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1;
+    }
+    .stat-item .stat-label {
+      font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.4;
+    }
+
+    /* Social proof strip */
+    .proof-strip {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 0.6rem 1.25rem;
+      margin-bottom: 2rem; font-size: 0.88rem; color: var(--text-muted);
+    }
+    .proof-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+      animation: pulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .proof-strip strong { color: var(--text); }
+
+    /* Form */
+    .capture-wrap {
+      width: 100%; max-width: 440px;
+    }
+    .capture-form {
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .capture-form input[type="email"] {
+      width: 100%; padding: 0.95rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text); font-size: 1rem;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .capture-form input:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .capture-form button {
+      width: 100%; padding: 1rem;
+      border: none; border-radius: var(--radius);
+      background: var(--accent); color: #0A1628;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .capture-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+    /* Success */
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius);
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Container */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Problem cards */
+    .problems-section { padding: 5rem 0; border-top: 1px solid var(--border); }
+    .problems-section h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 2rem; letter-spacing: -0.02em; }
+    .problem-cards { display: grid; gap: 1rem; }
+    @media (min-width: 580px) { .problem-cards { grid-template-columns: 1fr 1fr; } }
+    .pcard {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .pcard:hover { border-color: var(--accent); }
+    .pcard-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .pcard h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .pcard p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* How it works */
+    .how-section { padding: 5rem 0; border-top: 1px solid var(--border); }
+    .how-section h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 2rem; letter-spacing: -0.02em; }
+    .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+    .step-row {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem;
+    }
+    .step-num {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border-radius: 50%; background: var(--accent); color: #0A1628;
+      font-weight: 800; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      padding: 5rem 1.5rem; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .bottom-cta h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-wrap { margin: 0 auto; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 2rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/ideas/ai-clarity/">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="2" fill="#00B4D8"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="#00B4D8" stroke-width="2" stroke-linecap="round"/>
+        <path d="M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M5.64 18.36l2.12-2.12M16.24 7.76l2.12-2.12" stroke="#00B4D8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <path d="M9 12h6M12 9v6" stroke="#00B4D8" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span><span style="font-weight:200">AI</span><span style="font-weight:800">Clarity</span></span>
+    </a>
+    <a class="nav-cta" href="#signup">Book Free Consult</a>
+  </nav>
+
+  <!-- Problem-first hero -->
+  <section class="hero-problem">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;margin-bottom:2rem;">
+      <svg width="52" height="52" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="28" cy="28" r="26" stroke="#00B4D8" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
+        <path d="M28 14 C20 14 14 19 14 26 C14 30 16 33 19 35 C20 36 20 38 19 39 L22 39 C22 38 22 36 21 35 C19 33 17 30 17 26 C17 20.5 22 17 28 17" stroke="#00B4D8" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M28 14 C36 14 42 19 42 26 C42 30 40 33 37 35 C36 36 36 38 37 39 L34 39 C34 38 34 36 35 35 C37 33 39 30 39 26 C39 20.5 34 17 28 17" stroke="#00B4D8" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="28" y1="14" x2="28" y2="39" stroke="#00B4D8" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.5"/>
+        <circle cx="28" cy="28" r="3" fill="#00B4D8"/>
+        <circle cx="19" cy="24" r="2" fill="#00B4D8" opacity="0.7"/>
+        <circle cx="37" cy="24" r="2" fill="#00B4D8" opacity="0.7"/>
+        <circle cx="21" cy="32" r="1.5" fill="#00B4D8" opacity="0.5"/>
+        <circle cx="35" cy="32" r="1.5" fill="#00B4D8" opacity="0.5"/>
+        <line x1="19" y1="24" x2="28" y2="28" stroke="#00B4D8" stroke-width="1" opacity="0.5"/>
+        <line x1="37" y1="24" x2="28" y2="28" stroke="#00B4D8" stroke-width="1" opacity="0.5"/>
+        <line x1="21" y1="32" x2="28" y2="28" stroke="#00B4D8" stroke-width="1" opacity="0.4"/>
+        <line x1="35" y1="32" x2="28" y2="28" stroke="#00B4D8" stroke-width="1" opacity="0.4"/>
+        <circle cx="28" cy="28" r="1.5" fill="#fff" opacity="0.8"/>
+      </svg>
+      <h1 class="logo-wordmark" style="font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;color:#fff;line-height:1;">
+        <span style="color:#00B4D8;font-weight:200;">AI</span>Clarity
+      </h1>
+    </div>
+    <div class="problem-tag">The Hard Truth</div>
+    <h1>Your competitors are automating.<br><em>You're still doing it manually.</em></h1>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-num">74%</div>
+        <div class="stat-label">of AU SMBs report admin taking more than 10 hrs/week</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">&lt;9%</div>
+        <div class="stat-label">have deployed AI that actually works day-to-day</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">14d</div>
+        <div class="stat-label">average time from consult to live system with AI Clarity</div>
+      </div>
+    </div>
+
+    <div class="proof-strip">
+      <div class="proof-dot"></div>
+      <span>Join <strong>127 others</strong> testing this approach</span>
+    </div>
+
+    <div class="capture-wrap" id="signup">
+      <form class="capture-form" id="form-top" onsubmit="handleSubmit(event,'top')">
+        <input type="hidden" name="idea_slug" value="ai-clarity" />
+        <input type="hidden" name="variant" value="b" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+        <button type="submit" id="btn-top">Book a Free Consultation</button>
+        <p class="form-note">30 minutes. No obligation. Real answers about your business.</p>
+      </form>
+      <div class="form-success" id="success-top">
+        <h3>You're on the list.</h3>
+        <p>We'll reach out within 24 hours to schedule your free consultation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem deep-dive -->
+  <section class="problems-section">
+    <div class="container">
+      <h2>Why most AI projects fail for small businesses</h2>
+      <div class="problem-cards">
+        <div class="pcard">
+          <div class="pcard-icon">🌀</div>
+          <h3>Tool overload</h3>
+          <p>There are 10,000+ AI tools. No one has time to evaluate them. Most are marketing fluff with no ROI.</p>
+        </div>
+        <div class="pcard">
+          <div class="pcard-icon">💸</div>
+          <h3>Wasted consultancy spend</h3>
+          <p>Big agencies charge $50k for a "strategy". You get a PDF. Nothing gets built. Nothing changes.</p>
+        </div>
+        <div class="pcard">
+          <div class="pcard-icon">⏳</div>
+          <h3>No time to experiment</h3>
+          <p>You're running a business. You can't spend 3 months trialling tools that may or may not work.</p>
+        </div>
+        <div class="pcard">
+          <div class="pcard-icon">🔌</div>
+          <h3>Integration hell</h3>
+          <p>Most AI tools don't connect to existing systems without custom dev work. That costs time and money.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-section">
+    <div class="container">
+      <h2>How AI Clarity works</h2>
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Free 30-min operations audit</h3>
+            <p>We map your most time-consuming manual processes and identify where AI will have the biggest impact. No obligation, no hard sell.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Fixed-price implementation plan</h3>
+            <p>You get a clear scope with a fixed price. We select the right tools for your stack — no lock-in, no vendor kickbacks.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>Live system in days, not months</h3>
+            <p>We build, integrate, and test everything. You get a working system with handover docs and 30-day support included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta" id="bottom-cta">
+    <div class="container">
+      <h2>Stop losing hours to manual work</h2>
+      <p>AI implementation for Australian small businesses — no jargon, just results. Book your free consultation today.</p>
+      <div class="capture-wrap">
+        <form class="capture-form" id="form-bottom" onsubmit="handleSubmit(event,'bottom')">
+          <input type="hidden" name="idea_slug" value="ai-clarity" />
+          <input type="hidden" name="variant" value="b" />
+          <input type="hidden" name="utm_source" value="lander" />
+          <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+          <button type="submit" id="btn-bottom">Book a Free Consultation</button>
+          <p class="form-note">Limited slots available this month.</p>
+        </form>
+        <div class="form-success" id="success-bottom">
+          <h3>You're on the list.</h3>
+          <p>We'll reach out within 24 hours to schedule your free consultation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">@0xscrubbed</a></p>
+    <p style="margin-top:0.4rem">&copy; 2026 0xscrubbed</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e, id) {
+      e.preventDefault();
+      var form = document.getElementById('form-' + id);
+      var btn = document.getElementById('btn-' + id);
+      var success = document.getElementById('success-' + id);
+      btn.disabled = true;
+      btn.textContent = 'Booking...';
+      var fd = new FormData(form);
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('utm_campaign')) fd.append('utm_campaign', params.get('utm_campaign'));
+      if (params.get('utm_medium')) fd.append('utm_medium', params.get('utm_medium'));
+      fetch('https://capture.0xscrubbed.xyz/signup', { method: 'POST', body: fd })
+        .catch(function() {})
+        .finally(function() {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+    }
+  </script>
+
+</body>
+</html>
