@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split or Steal — App Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a44a;
+    --gold-bright: #e4c76b;
+    --gold-dark: #a07830;
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --surface-2: #2c2c2e;
+    --surface-3: #3a3a3c;
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.6);
+    --text-3: rgba(255,255,255,0.35);
+    --green: #30d158;
+    --red: #ff453a;
+    --blue: #0a84ff;
+    --orange: #ff9f0a;
+    /* iPhone 15 Pro screen: 393×852 logical points */
+    --screen-w: 393px;
+    --screen-h: 852px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #0a0a0a;
+    font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+    color: #f5f5f5;
+    -webkit-font-smoothing: antialiased;
+    padding: 60px 40px;
+  }
+
+  h1.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .page-sub {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+    margin-bottom: 60px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-top: 60px;
+  }
+
+  .screen-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  /* ── iPhone Frame ── */
+  .iphone {
+    width: var(--screen-w);
+    height: var(--screen-h);
+    border-radius: 47px;
+    border: 3px solid #2a2a2a;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.05),
+      0 30px 80px rgba(0,0,0,0.8),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+    flex-shrink: 0;
+  }
+
+  /* Dynamic Island */
+  .iphone::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 100;
+  }
+
+  /* Status bar */
+  .status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 59px;
+    padding: 16px 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 90;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .status-bar .time {
+    width: 54px;
+    text-align: left;
+  }
+
+  .status-bar .icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  /* Signal bars */
+  .signal-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    height: 12px;
+  }
+  .signal-bars .bar {
+    width: 3px;
+    background: white;
+    border-radius: 1px;
+  }
+  .signal-bars .bar:nth-child(1) { height: 4px; }
+  .signal-bars .bar:nth-child(2) { height: 6px; }
+  .signal-bars .bar:nth-child(3) { height: 8px; }
+  .signal-bars .bar:nth-child(4) { height: 11px; }
+
+  /* Battery */
+  .battery {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+  .battery-body {
+    width: 25px;
+    height: 12px;
+    border: 1.5px solid white;
+    border-radius: 3px;
+    padding: 1.5px;
+    position: relative;
+  }
+  .battery-body::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 5px;
+    background: white;
+    border-radius: 0 1px 1px 0;
+  }
+  .battery-fill {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 1px;
+  }
+
+  /* WiFi icon */
+  .wifi {
+    width: 16px;
+    height: 12px;
+    position: relative;
+  }
+  .wifi::before {
+    content: '⏣';
+    font-size: 16px;
+    line-height: 1;
+    position: absolute;
+    top: -3px;
+    left: 0;
+  }
+
+  /* Screen content area */
+  .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Home indicator */
+  .home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    z-index: 90;
+  }
+
+  /* ── iOS Navigation Bar ── */
+  .ios-nav {
+    padding: 59px 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ios-nav .nav-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+  }
+  .ios-nav .nav-btn {
+    font-size: 17px;
+    color: var(--blue);
+    font-weight: 400;
+  }
+  .ios-nav .nav-back {
+    font-size: 17px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ios-nav .nav-back::before {
+    content: '‹';
+    font-size: 24px;
+    line-height: 1;
+    margin-top: -1px;
+  }
+
+  /* Large title */
+  .ios-large-title {
+    padding: 0 16px 8px;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+
+  /* ── Tab Bar ── */
+  .tab-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 83px;
+    background: rgba(28,28,30,0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 8px;
+    z-index: 80;
+  }
+
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 60px;
+  }
+
+  .tab-icon {
+    font-size: 22px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-label {
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .tab-item.active .tab-icon,
+  .tab-item.active .tab-label {
+    color: var(--gold);
+  }
+
+  .tab-item:not(.active) .tab-icon,
+  .tab-item:not(.active) .tab-label {
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── Content Helpers ── */
+  .content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 100px;
+  }
+
+  .card {
+    margin: 0 16px 12px;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px;
+    border: 0.5px solid var(--border);
+  }
+
+  .card-sm {
+    margin: 0 16px 8px;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 14px;
+    border: 0.5px solid var(--border);
+  }
+
+  .divider-line {
+    height: 0.5px;
+    background: var(--border);
+    margin: 0 16px;
+  }
+
+  /* ── Onboarding Screens ── */
+  .onboarding-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 32px 40px;
+    text-align: center;
+    flex: 1;
+  }
+
+  .onboarding-visual {
+    width: 240px;
+    height: 240px;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .onboarding-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: white;
+  }
+
+  .onboarding-desc {
+    font-size: 16px;
+    color: var(--text-2);
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 300px;
+  }
+
+  .onboarding-footer {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 32px;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .dot.active {
+    background: var(--gold);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .ios-btn-primary {
+    width: 100%;
+    max-width: 340px;
+    height: 54px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #000;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.01em;
+  }
+
+  .ios-btn-secondary {
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── Split/Steal Cards for Onboarding ── */
+  .card-pair {
+    display: flex;
+    gap: 16px;
+    perspective: 800px;
+  }
+
+  .choice-card {
+    width: 100px;
+    height: 140px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .choice-card.split {
+    background: linear-gradient(160deg, rgba(48,209,88,0.2) 0%, rgba(48,209,88,0.05) 100%);
+    border: 1.5px solid rgba(48,209,88,0.4);
+    color: var(--green);
+  }
+
+  .choice-card.steal {
+    background: linear-gradient(160deg, rgba(255,69,58,0.2) 0%, rgba(255,69,58,0.05) 100%);
+    border: 1.5px solid rgba(255,69,58,0.4);
+    color: var(--red);
+  }
+
+  .choice-card .card-icon {
+    font-size: 36px;
+  }
+
+  /* ── Game Theory Matrix ── */
+  .matrix {
+    width: 220px;
+    border-collapse: separate;
+    border-spacing: 4px;
+    font-size: 12px;
+  }
+
+  .matrix th {
+    font-weight: 600;
+    color: var(--text-2);
+    padding: 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .matrix td {
+    padding: 10px 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .matrix .both-split {
+    background: rgba(48,209,88,0.15);
+    color: var(--green);
+    border: 0.5px solid rgba(48,209,88,0.2);
+  }
+  .matrix .mixed {
+    background: rgba(255,159,10,0.12);
+    color: var(--orange);
+    border: 0.5px solid rgba(255,159,10,0.15);
+  }
+  .matrix .both-steal {
+    background: rgba(255,69,58,0.12);
+    color: var(--red);
+    border: 0.5px solid rgba(255,69,58,0.15);
+  }
+
+  /* ── Stats Cards ── */
+  .stat-row {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 12px;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 14px;
+    border: 0.5px solid var(--border);
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Reputation Bar ── */
+  .rep-bar-container {
+    margin: 0 16px 16px;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px;
+    border: 0.5px solid var(--border);
+  }
+
+  .rep-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .rep-bar-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .rep-bar-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .rep-track {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .rep-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--green));
+    width: 72%;
+  }
+
+  .rep-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Game History List ── */
+  .game-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .game-item + .game-item {
+    border-top: 0.5px solid var(--border);
+  }
+
+  .game-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .game-info {
+    flex: 1;
+  }
+
+  .game-info .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .game-info .sub {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+
+  .game-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .game-badge.split {
+    background: rgba(48,209,88,0.15);
+    color: var(--green);
+  }
+
+  .game-badge.steal {
+    background: rgba(255,69,58,0.15);
+    color: var(--red);
+  }
+
+  /* ── Decision Screen ── */
+  .decision-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  .timer-ring {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid var(--surface-2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .timer-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: var(--gold);
+    border-right-color: var(--gold);
+    border-bottom-color: var(--gold);
+    transform: rotate(-30deg);
+  }
+
+  .timer-number {
+    font-size: 44px;
+    font-weight: 200;
+    color: white;
+    letter-spacing: -0.03em;
+  }
+
+  .timer-label {
+    font-size: 13px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+  }
+
+  .player-dots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .player-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .player-dot.decided {
+    border-color: var(--gold);
+    box-shadow: 0 0 8px rgba(201,164,74,0.3);
+  }
+
+  .waiting-text {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 48px;
+  }
+
+  .decision-buttons {
+    display: flex;
+    gap: 16px;
+    padding: 0 24px;
+    width: 100%;
+  }
+
+  .decision-btn {
+    flex: 1;
+    height: 120px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .decision-btn.split-btn {
+    background: linear-gradient(160deg, rgba(48,209,88,0.2) 0%, rgba(48,209,88,0.06) 100%);
+    border: 2px solid rgba(48,209,88,0.5);
+    color: var(--green);
+    /* Chromatic aberration: blue-green edges */
+    box-shadow:
+      0 0 0 1px rgba(34,197,94,0.4),
+      0 0 16px rgba(34,197,94,0.25),
+      -3px 0 12px rgba(59,130,246,0.2),
+      3px 0 12px rgba(16,185,129,0.2),
+      0 0 40px rgba(34,197,94,0.1);
+    text-shadow: -1px 0 4px rgba(59,130,246,0.3), 1px 0 4px rgba(16,185,129,0.3);
+  }
+
+  .decision-btn.steal-btn {
+    background: linear-gradient(160deg, rgba(255,69,58,0.2) 0%, rgba(255,69,58,0.06) 100%);
+    border: 2px solid rgba(255,69,58,0.5);
+    color: var(--red);
+    /* Chromatic aberration: red-orange edges */
+    box-shadow:
+      0 0 0 1px rgba(239,68,68,0.4),
+      0 0 16px rgba(239,68,68,0.25),
+      -3px 0 12px rgba(251,146,60,0.2),
+      3px 0 12px rgba(239,68,68,0.15),
+      0 0 40px rgba(239,68,68,0.1);
+    text-shadow: -1px 0 4px rgba(251,146,60,0.3), 1px 0 4px rgba(239,68,68,0.3);
+  }
+
+  .decision-btn .btn-icon {
+    font-size: 32px;
+  }
+
+  .bill-amount {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-top: 16px;
+    font-weight: 500;
+  }
+
+  /* ── Reveal Screen ── */
+  .reveal-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    text-align: center;
+  }
+
+  .reveal-headline {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .reveal-name {
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  .reveal-action {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-2);
+    margin-bottom: 32px;
+  }
+
+  .reveal-amount {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+  }
+
+  .reveal-amount.saved {
+    color: var(--green);
+  }
+
+  .reveal-amount.owes {
+    color: var(--red);
+  }
+
+  .reveal-context {
+    font-size: 15px;
+    color: var(--text-3);
+    margin-bottom: 40px;
+  }
+
+  .reveal-players {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 32px;
+  }
+
+  .reveal-player {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--surface);
+    gap: 12px;
+  }
+
+  .reveal-player:first-child {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .reveal-player:last-child {
+    border-radius: 0 0 14px 14px;
+  }
+
+  .reveal-player + .reveal-player {
+    border-top: 0.5px solid rgba(255,255,255,0.05);
+  }
+
+  .reveal-player .rp-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background: var(--surface-2);
+  }
+
+  .reveal-player .rp-name {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .reveal-player .rp-choice {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .reveal-player .rp-choice.split-choice {
+    color: var(--green);
+    background: rgba(48,209,88,0.12);
+  }
+
+  .reveal-player .rp-choice.steal-choice {
+    color: var(--red);
+    background: rgba(255,69,58,0.12);
+  }
+
+  .reveal-cta {
+    width: calc(100% - 32px);
+    height: 54px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #000;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Settlement Screen ── */
+  .settlement-screen {
+    padding-top: 70px;
+  }
+
+  .settle-amount-section {
+    text-align: center;
+    padding: 24px 0 32px;
+  }
+
+  .settle-label {
+    font-size: 14px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .settle-amount {
+    font-size: 52px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.04em;
+  }
+
+  .settle-detail {
+    font-size: 14px;
+    color: var(--text-3);
+    margin-top: 4px;
+  }
+
+  .pay-method {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .pay-method + .pay-method {
+    border-top: 0.5px solid rgba(255,255,255,0.05);
+  }
+
+  .pay-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .pay-info {
+    flex: 1;
+  }
+
+  .pay-info .pay-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .pay-info .pay-sub {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+
+  .pay-arrow {
+    color: var(--text-3);
+    font-size: 18px;
+  }
+
+  /* Apple Pay button */
+  .apple-pay-btn {
+    margin: 16px 16px 12px;
+    height: 54px;
+    border-radius: 14px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+  }
+
+  .apple-pay-logo {
+    height: 22px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── Share Screen ── */
+  .share-card-preview {
+    margin: 0 16px 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(160deg, #0f0f0f 0%, #1a1510 100%);
+    border: 1px solid rgba(201,164,74,0.2);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .share-card-preview .brand {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .share-card-preview .result-big {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .share-card-preview .result-sub {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .share-avatars {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .share-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .share-avatar .sa-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .share-avatar .sa-name {
+    font-size: 11px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .share-avatar .sa-choice {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .share-card-preview .tagline {
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+  }
+
+  .share-actions {
+    display: flex;
+    gap: 0;
+    margin: 0 16px 16px;
+    background: var(--surface);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+  }
+
+  .share-action {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 8px;
+    font-size: 11px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .share-action + .share-action {
+    border-left: 0.5px solid var(--border);
+  }
+
+  .share-action .sa-icon {
+    font-size: 24px;
+  }
+
+  /* ── Create Game Screen ── */
+  .create-section-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
+    font-weight: 600;
+    padding: 20px 16px 8px;
+  }
+
+  .input-field {
+    display: flex;
+    align-items: center;
+    margin: 0 16px 1px;
+    background: var(--surface);
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .input-field:first-of-type {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .input-field:last-of-type {
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 0;
+  }
+
+  .input-field.single {
+    border-radius: 12px;
+  }
+
+  .input-field .field-icon {
+    font-size: 18px;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .input-field .field-label {
+    font-size: 15px;
+    color: var(--text-2);
+    flex: 1;
+  }
+
+  .input-field .field-value {
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+  }
+
+  .input-field + .input-field {
+    border-top: 0.5px solid rgba(255,255,255,0.05);
+  }
+
+  .player-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 16px 16px;
+  }
+
+  .player-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    border: 0.5px solid var(--border);
+  }
+
+  .player-chip .chip-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    background: var(--surface-2);
+  }
+
+  .add-player-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--gold);
+    border: 1.5px dashed rgba(201,164,74,0.4);
+  }
+
+  /* ── QR Share Section ── */
+  .qr-section {
+    margin: 20px 16px;
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    border: 0.5px solid var(--border);
+  }
+
+  .qr-placeholder {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 12px;
+  }
+
+  /* Simple QR pattern */
+  .qr-pattern {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    gap: 1px;
+  }
+
+  .qr-pattern .qr-cell {
+    background: #000;
+    border-radius: 1px;
+  }
+
+  .qr-pattern .qr-cell.empty {
+    background: transparent;
+  }
+
+  .qr-text {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 4px;
+  }
+
+  .qr-link {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── Floating pill tab bar ── */
+  .tab-bar-float {
+    position: absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30,30,30,0.92);
+    backdrop-filter: blur(16px);
+    border-radius: 100px;
+    padding: 12px 24px;
+    display: flex;
+    gap: 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    z-index: 80;
+  }
+
+  /* ── Floating context pill ── */
+  .float-pill {
+    position: absolute;
+    background: rgba(201,164,74,0.15);
+    border: 1px solid rgba(201,164,74,0.3);
+    color: #c9a44a;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* Caption below screens */
+  .screen-caption {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Split or Steal</h1>
+<p class="page-sub">App Preview — Game Theory for Your Dinner Bill</p>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ONBOARDING -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-label">Onboarding</div>
+<div class="screen-row">
+
+  <!-- Onboarding 1 -->
+  <div>
+    <div class="iphone" id="screen-onboard-1">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="onboarding-screen">
+          <div class="onboarding-visual">
+            <div class="card-pair">
+              <div class="choice-card split">
+                <div class="card-icon">🤝</div>
+                SPLIT
+              </div>
+              <div class="choice-card steal">
+                <div class="card-icon">🔥</div>
+                STEAL
+              </div>
+            </div>
+          </div>
+          <div class="onboarding-title">Everyone picks.<br>No one knows.</div>
+          <div class="onboarding-desc">Each player secretly chooses to split or steal. Then the truth comes out.</div>
+        </div>
+        <div class="onboarding-footer">
+          <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="ios-btn-primary">Continue</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Onboarding — Slide 1</div>
+  </div>
+
+  <!-- Onboarding 2 -->
+  <div>
+    <div class="iphone" id="screen-onboard-2">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="onboarding-screen">
+          <div class="onboarding-visual">
+            <table class="matrix">
+              <tr>
+                <th></th>
+                <th style="color: var(--green);">They Split</th>
+                <th style="color: var(--red);">They Steal</th>
+              </tr>
+              <tr>
+                <th style="text-align: right; color: var(--green);">You Split</th>
+                <td class="both-split">Fair split<br><span style="font-size:10px;opacity:0.7">Everyone wins</span></td>
+                <td class="mixed">You pay more<br><span style="font-size:10px;opacity:0.7">They pay less</span></td>
+              </tr>
+              <tr>
+                <th style="text-align: right; color: var(--red);">You Steal</th>
+                <td class="mixed">You pay less<br><span style="font-size:10px;opacity:0.7">They pay more</span></td>
+                <td class="both-steal">Random pays all<br><span style="font-size:10px;opacity:0.7">Chaos mode</span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="onboarding-title">Game theory.<br>Real stakes.</div>
+          <div class="onboarding-desc">Your choice changes what everyone pays. Strategy beats generosity.</div>
+        </div>
+        <div class="onboarding-footer">
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="ios-btn-primary">Continue</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Onboarding — Slide 2</div>
+  </div>
+
+  <!-- Onboarding 3 -->
+  <div>
+    <div class="iphone" id="screen-onboard-3">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="onboarding-screen">
+          <div class="onboarding-visual">
+            <div style="width:120px;height:120px;border-radius:30px;background:linear-gradient(135deg, var(--gold-bright), var(--gold-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(201,164,74,0.3);">
+              <span style="font-size:60px;">⚖️</span>
+            </div>
+          </div>
+          <div class="onboarding-title">Game theory for<br>your dinner bill.</div>
+          <div class="onboarding-desc">Play with friends. Reveal who your real ones are.</div>
+        </div>
+        <div class="onboarding-footer">
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+          </div>
+          <div class="ios-btn-primary">Get Started</div>
+          <div class="ios-btn-secondary">Already have an account? Sign In</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Onboarding — Slide 3</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HOME & CREATE GAME -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-label">Home & Create Game</div>
+<div class="screen-row">
+
+  <!-- Home Dashboard -->
+  <div>
+    <div class="iphone" id="screen-home">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-btn" style="opacity:0;">_</div>
+          <div class="nav-title" style="opacity:0;">_</div>
+          <div class="nav-btn" style="font-size:22px;">⚙️</div>
+        </div>
+        <div class="ios-large-title" style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:28px;">⚖️</span> Split or Steal
+        </div>
+        <div class="content-scroll">
+          <div class="stat-row">
+            <div class="stat-card">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Games</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" style="color:var(--green)">67%</div>
+              <div class="stat-label">Split Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" style="color:var(--gold)">$84</div>
+              <div class="stat-label">Saved</div>
+            </div>
+          </div>
+
+          <div class="rep-bar-container">
+            <div class="rep-bar-header">
+              <div class="rep-bar-title">Reputation</div>
+              <div class="rep-bar-value">Diplomat</div>
+            </div>
+            <div class="rep-track">
+              <div class="rep-fill"></div>
+            </div>
+            <div class="rep-labels">
+              <span>Thief</span>
+              <span>Saint</span>
+            </div>
+          </div>
+
+          <div class="create-section-label">Recent Games</div>
+          <div style="margin:0 16px;background:var(--surface);border-radius:14px;overflow:hidden;border:0.5px solid var(--border);">
+            <div class="game-item">
+              <div class="game-avatar" style="background:rgba(48,209,88,0.15);">🍕</div>
+              <div class="game-info">
+                <div class="title">Pizza Night</div>
+                <div class="sub">4 players · $156.00 · 2h ago</div>
+              </div>
+              <div class="game-badge split">SPLIT</div>
+            </div>
+            <div class="game-item">
+              <div class="game-avatar" style="background:rgba(255,69,58,0.15);">🍣</div>
+              <div class="game-info">
+                <div class="title">Sushi Friday</div>
+                <div class="sub">6 players · $312.00 · Yesterday</div>
+              </div>
+              <div class="game-badge steal">STOLE</div>
+            </div>
+            <div class="game-item">
+              <div class="game-avatar" style="background:rgba(48,209,88,0.15);">🍔</div>
+              <div class="game-info">
+                <div class="title">Burger Run</div>
+                <div class="sub">3 players · $87.50 · 3 days ago</div>
+              </div>
+              <div class="game-badge split">SPLIT</div>
+            </div>
+          </div>
+
+          <!-- New Game CTA -->
+          <div style="padding:20px 16px;">
+            <div class="ios-btn-primary" style="border-radius:14px;box-shadow:0 8px 32px rgba(201,164,74,0.2);">
+              New Game
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-bar-float">
+          <div class="tab-item active">
+            <div class="tab-icon">🏠</div>
+            <div class="tab-label">Home</div>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon">📊</div>
+            <div class="tab-label">History</div>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon">👤</div>
+            <div class="tab-label">Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Home Dashboard</div>
+  </div>
+
+  <!-- Create Game -->
+  <div>
+    <div class="iphone" id="screen-create">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-back" style="color:var(--gold);">Back</div>
+          <div class="nav-title">New Game</div>
+          <div class="nav-btn" style="opacity:0;">_</div>
+        </div>
+        <div class="content-scroll">
+          <div class="create-section-label">Bill Details</div>
+          <div class="input-field" style="border-radius:12px 12px 0 0;">
+            <div class="field-icon">💰</div>
+            <div class="field-label">Total Bill</div>
+            <div class="field-value">$248.00</div>
+          </div>
+          <div class="input-field" style="border-radius:0 0 12px 12px;">
+            <div class="field-icon">🏷️</div>
+            <div class="field-label">Game Name</div>
+            <div class="field-value" style="color:var(--text-2);">Saturday Dinner</div>
+          </div>
+
+          <div class="create-section-label">Players</div>
+          <div class="player-chips">
+            <div class="player-chip">
+              <div class="chip-avatar" style="background:rgba(201,164,74,0.2);">👤</div>
+              You
+            </div>
+            <div class="player-chip">
+              <div class="chip-avatar" style="background:rgba(48,209,88,0.15);">E</div>
+              Emma
+            </div>
+            <div class="player-chip">
+              <div class="chip-avatar" style="background:rgba(10,132,255,0.15);">J</div>
+              Jake
+            </div>
+            <div class="player-chip">
+              <div class="chip-avatar" style="background:rgba(255,159,10,0.15);">S</div>
+              Sam
+            </div>
+            <div class="add-player-chip">
+              <span style="font-size:16px;">+</span> Add Player
+            </div>
+          </div>
+
+          <div class="create-section-label">Timer</div>
+          <div class="input-field single">
+            <div class="field-icon">⏱️</div>
+            <div class="field-label">Decision Time</div>
+            <div class="field-value">30 sec</div>
+          </div>
+
+          <div class="qr-section">
+            <div class="qr-placeholder">
+              <div class="qr-pattern">
+                <!-- Simplified QR-like pattern -->
+                <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+                <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                <div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div>
+                <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div>
+                <div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+                <div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div>
+                <div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div>
+                <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+                <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+              </div>
+            </div>
+            <div class="qr-text">Share with players</div>
+            <div class="qr-link">splitsteal.app/g/a8x2k</div>
+          </div>
+
+          <div style="padding:0 16px 20px;">
+            <div class="ios-btn-primary" style="border-radius:14px;box-shadow:0 8px 32px rgba(201,164,74,0.2);">
+              Start Game
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Create Game</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- GAMEPLAY -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-label">Gameplay</div>
+<div class="screen-row">
+
+  <!-- The Decision -->
+  <div>
+    <div class="iphone" id="screen-decision">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-btn" style="opacity:0;">_</div>
+          <div class="nav-title" style="color:var(--text-3);font-size:15px;font-weight:500;">Saturday Dinner · $248</div>
+          <div class="nav-btn" style="opacity:0;">_</div>
+        </div>
+        <div class="decision-screen" style="position:relative;">
+          <div class="float-pill" style="top: 108px; left: 16px;">23 seconds</div>
+          <div class="float-pill" style="top: 108px; right: 16px;">3 players in</div>
+          <div class="float-pill" style="bottom: 148px; left: 50%; transform: translateX(-50%);">Real stakes</div>
+          <div class="timer-ring">
+            <div class="timer-number">23</div>
+          </div>
+          <div class="timer-label">seconds left</div>
+
+          <div class="player-dots">
+            <div class="player-dot decided" style="background:rgba(201,164,74,0.15);">E</div>
+            <div class="player-dot" style="opacity:0.4;">J</div>
+            <div class="player-dot decided" style="background:rgba(201,164,74,0.15);">S</div>
+            <div class="player-dot" style="opacity:0.4;">👤</div>
+          </div>
+          <div class="waiting-text">2 of 4 have decided</div>
+
+          <div class="decision-buttons">
+            <div class="decision-btn split-btn" style="box-shadow: 0 0 0 1px rgba(34,197,94,0.4), 0 0 12px rgba(34,197,94,0.2), -2px 0 8px rgba(59,130,246,0.15), 2px 0 8px rgba(168,85,247,0.15);">
+              <div class="btn-icon">🤝</div>
+              SPLIT
+            </div>
+            <div class="decision-btn steal-btn" style="box-shadow: 0 0 0 1px rgba(239,68,68,0.4), 0 0 12px rgba(239,68,68,0.2), -2px 0 8px rgba(251,146,60,0.15), 2px 0 8px rgba(239,68,68,0.1);">
+              <div class="btn-icon">🔥</div>
+              STEAL
+            </div>
+          </div>
+          <div class="bill-amount">Your share if everyone splits: $62.00</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">The Decision</div>
+  </div>
+
+  <!-- The Reveal -->
+  <div>
+    <div class="iphone" id="screen-reveal">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-btn" style="opacity:0;">_</div>
+          <div class="nav-title" style="color:var(--text-3);font-size:15px;font-weight:500;">Saturday Dinner</div>
+          <div class="nav-btn" style="color:var(--gold);font-size:15px;">Done</div>
+        </div>
+        <div class="reveal-screen">
+          <div class="reveal-headline">SOMEONE STOLE</div>
+          <div class="reveal-name">Jake</div>
+          <div class="reveal-action">got away with it</div>
+          <div class="reveal-amount saved">−$42</div>
+          <div class="reveal-context">Jake pays $20.00 instead of $62.00</div>
+
+          <div class="reveal-players">
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(48,209,88,0.12);">👤</div>
+              <div class="rp-name">You</div>
+              <div class="rp-choice split-choice">SPLIT</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(48,209,88,0.12);">E</div>
+              <div class="rp-name">Emma</div>
+              <div class="rp-choice split-choice">SPLIT</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(255,69,58,0.12);">J</div>
+              <div class="rp-name">Jake</div>
+              <div class="rp-choice steal-choice">STEAL</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(48,209,88,0.12);">S</div>
+              <div class="rp-name">Sam</div>
+              <div class="rp-choice split-choice">SPLIT</div>
+            </div>
+          </div>
+
+          <div class="reveal-cta">Settle Up</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">The Reveal</div>
+  </div>
+
+  <!-- Chaos Mode -->
+  <div>
+    <div class="iphone" id="screen-chaos">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-btn" style="opacity:0;">_</div>
+          <div class="nav-title" style="color:var(--text-3);font-size:15px;font-weight:500;">Saturday Dinner</div>
+          <div class="nav-btn" style="color:var(--gold);font-size:15px;">Done</div>
+        </div>
+        <div class="reveal-screen">
+          <div class="reveal-headline" style="color:var(--orange);font-size:12px;letter-spacing:0.2em;">⚠️ CHAOS MODE ⚠️</div>
+          <div class="reveal-name" style="font-size:28px;margin-bottom:8px;">Everyone Stole</div>
+          <div class="reveal-action" style="font-size:16px;">Random selection picked...</div>
+          <div style="margin:20px 0 8px;">
+            <div style="width:64px;height:64px;border-radius:32px;background:rgba(255,69,58,0.15);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto;border:2px solid rgba(255,69,58,0.3);">J</div>
+          </div>
+          <div class="reveal-name" style="font-size:24px;color:var(--red);">Jake</div>
+          <div class="reveal-amount owes" style="font-size:44px;">$248</div>
+          <div class="reveal-context">Jake pays the entire bill</div>
+
+          <div class="reveal-players" style="margin-top:24px;">
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(255,69,58,0.12);">👤</div>
+              <div class="rp-name">You</div>
+              <div class="rp-choice steal-choice">STEAL</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(255,69,58,0.12);">E</div>
+              <div class="rp-name">Emma</div>
+              <div class="rp-choice steal-choice">STEAL</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(255,69,58,0.12);">J</div>
+              <div class="rp-name">Jake</div>
+              <div class="rp-choice steal-choice">STEAL</div>
+            </div>
+            <div class="reveal-player">
+              <div class="rp-avatar" style="background:rgba(255,69,58,0.12);">S</div>
+              <div class="rp-name">Sam</div>
+              <div class="rp-choice steal-choice">STEAL</div>
+            </div>
+          </div>
+
+          <div class="reveal-cta" style="margin-top:4px;">View Breakdown</div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Chaos Mode — Everyone Stole</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SETTLEMENT & SHARING -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-label">Settlement & Sharing</div>
+<div class="screen-row">
+
+  <!-- Settle Up -->
+  <div>
+    <div class="iphone" id="screen-settle">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-back" style="color:var(--gold);">Back</div>
+          <div class="nav-title">Settle Up</div>
+          <div class="nav-btn" style="opacity:0;">_</div>
+        </div>
+        <div class="content-scroll">
+          <div class="settle-amount-section">
+            <div class="settle-label">You owe</div>
+            <div class="settle-amount">$76.00</div>
+            <div class="settle-detail">Saturday Dinner · You split, Jake stole</div>
+          </div>
+
+          <div class="apple-pay-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="26" viewBox="-1 -1 52 26"><path d="M9.6 3.8c-.57.67-1.48 1.2-2.4 1.12-.11-.91.34-1.88.85-2.48C8.62 1.76 9.64 1.26 10.44 1.2c.1.95-.28 1.88-.84 2.6zm.82 1.34c-1.32-.08-2.45.75-3.08.75-.64 0-1.62-.71-2.66-.69-1.37.02-2.64.8-3.34 2.03-1.43 2.48-.37 6.14 1.02 8.15.68 1 1.49 2.1 2.56 2.06 1.03-.04 1.42-.66 2.66-.66 1.24 0 1.59.66 2.68.64 1.1-.02 1.8-1 2.48-2 .78-1.14 1.1-2.24 1.12-2.3-.02-.01-2.15-.82-2.17-3.28-.02-2.05 1.67-3.03 1.75-3.08-.96-1.42-2.44-1.58-2.97-1.62h-.05zM19.88 2.36V19.9h2.72v-6.01h3.75c3.43 0 5.84-2.36 5.84-5.79s-2.37-5.74-5.75-5.74h-6.56zm2.72 2.28h3.12c2.36 0 3.7 1.26 3.7 3.49s-1.34 3.5-3.72 3.5h-3.1V4.64zm14.6 15.4c1.7 0 3.28-.86 3.99-2.22h.06v2.09h2.51v-8.67c0-2.53-2.02-4.16-5.12-4.16-2.88 0-5 1.65-5.09 3.92h2.44c.2-1.08 1.19-1.79 2.55-1.79 1.65 0 2.57.77 2.57 2.19v.96l-3.36.2c-3.13.19-4.83 1.47-4.83 3.71 0 2.26 1.76 3.77 4.28 3.77zm.73-2.05c-1.43 0-2.35-.69-2.35-1.74 0-1.09.88-1.72 2.56-1.82l3-.19v.98c0 1.62-1.37 2.77-3.21 2.77zm8.53 6.56c2.64 0 3.89-1.02 4.98-4.08l4.76-13.38h-2.77l-3.2 10.36h-.06l-3.2-10.36h-2.85l4.59 12.7-.25.78c-.41 1.34-1.1 1.86-2.3 1.86-.22 0-.64-.02-.8-.04v2.1c.15.04.82.06 1.1.06z" fill="black"/></svg>
+          </div>
+
+          <div class="create-section-label" style="padding-top:12px;">Other Payment Methods</div>
+          <div style="margin:0 16px;background:var(--surface);border-radius:14px;overflow:hidden;border:0.5px solid var(--border);">
+            <div class="pay-method">
+              <div class="pay-icon" style="background:rgba(10,132,255,0.15);">
+                <span style="font-size:20px;">💳</span>
+              </div>
+              <div class="pay-info">
+                <div class="pay-title">Card</div>
+                <div class="pay-sub">Visa •••• 4821</div>
+              </div>
+              <div class="pay-arrow">›</div>
+            </div>
+            <div class="pay-method">
+              <div class="pay-icon" style="background:rgba(48,209,88,0.15);">
+                <span style="font-size:20px;">🏦</span>
+              </div>
+              <div class="pay-info">
+                <div class="pay-title">Bank Transfer</div>
+                <div class="pay-sub">BSB •••• 2847</div>
+              </div>
+              <div class="pay-arrow">›</div>
+            </div>
+            <div class="pay-method">
+              <div class="pay-icon" style="background:rgba(255,159,10,0.15);">
+                <span style="font-size:20px;">📱</span>
+              </div>
+              <div class="pay-info">
+                <div class="pay-title">PayID</div>
+                <div class="pay-sub">Linked to phone number</div>
+              </div>
+              <div class="pay-arrow">›</div>
+            </div>
+          </div>
+
+          <div style="padding:24px 16px;text-align:center;">
+            <div style="font-size:12px;color:var(--text-3);">Payments secured with end-to-end encryption</div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Settlement</div>
+  </div>
+
+  <!-- Share Results -->
+  <div>
+    <div class="iphone" id="screen-share">
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="icons">
+          <div class="signal-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin: 0 2px;">
+            <path d="M8 2.4C6.2 2.4 4.5 3.1 3.2 4.4L1.6 2.8C3.3 1.1 5.5 0 8 0s4.7 1.1 6.4 2.8L13 4.4C11.5 3.1 9.8 2.4 8 2.4z" fill="white" opacity="0.4"/>
+            <path d="M8 5.6C6.8 5.6 5.7 6.1 4.8 6.9L3.2 5.3C4.5 4.1 6.2 3.2 8 3.2s3.5.9 4.8 2.1L11.2 6.9C10.3 6.1 9.2 5.6 8 5.6z" fill="white" opacity="0.7"/>
+            <path d="M8 8.8c-.8 0-1.5.3-2 .9L8 12l2-2.3C9.5 9.1 8.8 8.8 8 8.8z" fill="white"/>
+          </svg>
+          <div class="battery">
+            <div class="battery-body"><div class="battery-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="ios-nav">
+          <div class="nav-back" style="color:var(--gold);">Back</div>
+          <div class="nav-title">Share</div>
+          <div class="nav-btn" style="opacity:0;">_</div>
+        </div>
+        <div class="content-scroll">
+          <div style="padding-top:12px;"></div>
+          <div class="share-card-preview">
+            <div class="brand">SPLIT OR STEAL</div>
+            <div class="result-big">3 split. 1 stole.</div>
+            <div class="result-sub">Saturday Dinner · $248.00</div>
+            <div class="share-avatars">
+              <div class="share-avatar">
+                <div class="sa-circle" style="background:rgba(48,209,88,0.15);">👤</div>
+                <div class="sa-name">You</div>
+                <div class="sa-choice" style="color:var(--green);">Split</div>
+              </div>
+              <div class="share-avatar">
+                <div class="sa-circle" style="background:rgba(48,209,88,0.15);">E</div>
+                <div class="sa-name">Emma</div>
+                <div class="sa-choice" style="color:var(--green);">Split</div>
+              </div>
+              <div class="share-avatar">
+                <div class="sa-circle" style="background:rgba(255,69,58,0.15);">J</div>
+                <div class="sa-name">Jake</div>
+                <div class="sa-choice" style="color:var(--red);">Steal</div>
+              </div>
+              <div class="share-avatar">
+                <div class="sa-circle" style="background:rgba(48,209,88,0.15);">S</div>
+                <div class="sa-name">Sam</div>
+                <div class="sa-choice" style="color:var(--green);">Split</div>
+              </div>
+            </div>
+            <div class="tagline">splitsteal.app</div>
+          </div>
+
+          <div class="share-actions">
+            <div class="share-action">
+              <div class="sa-icon">💬</div>
+              iMessage
+            </div>
+            <div class="share-action">
+              <div class="sa-icon" style="color:var(--green);">📱</div>
+              WhatsApp
+            </div>
+            <div class="share-action">
+              <div class="sa-icon">📋</div>
+              Copy Link
+            </div>
+            <div class="share-action">
+              <div class="sa-icon">📤</div>
+              More
+            </div>
+          </div>
+
+          <div style="margin:8px 16px;background:var(--surface);border-radius:14px;padding:16px;border:0.5px solid var(--border);text-align:center;">
+            <div style="font-size:13px;color:var(--text-2);margin-bottom:4px;">Download the app to play</div>
+            <div style="font-size:15px;color:var(--gold);font-weight:600;">splitsteal.app</div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <div class="screen-caption">Share Results</div>
+  </div>
+
+</div>
+
+</body>
+</html>

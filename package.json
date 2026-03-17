@@ -1,0 +1,24 @@
+{
+  "name": "splitorsteal-landing",
+  "version": "1.0.0",
+  "description": "Landing page for Split or Steal app",
+  "main": "webhook-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitchstuckey/splitorsteal-landing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mitchstuckey/splitorsteal-landing/issues"
+  },
+  "homepage": "https://github.com/mitchstuckey/splitorsteal-landing#readme",
+  "devDependencies": {
+    "puppeteer": "^24.38.0"
+  }
+}

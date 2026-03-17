@@ -1,0 +1,21 @@
+{
+  "name": "Split or Steal",
+  "short_name": "S|S",
+  "description": "The dinner bill game where strategy beats generosity.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#c9a84c",
+  "background_color": "#050505",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

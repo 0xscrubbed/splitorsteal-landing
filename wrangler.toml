@@ -1,0 +1,18 @@
+name = "splitorsteal-landing"
+account_id = "df414d6bce3f704da88a639e943c579f"
+compatibility_date = "2025-09-01"
+main = "webhook-worker.js"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "none"
+not_found_handling = "none"
+
+# Secrets (set via: wrangler secret put NOTION_API_KEY)
+# NOTION_API_KEY — Notion integration token (ntn_...)
+# TALLY_SIGNING_SECRET — optional Tally webhook signing secret
+
+# Routes: the worker handles /webhook/* and falls through to assets for everything else
+# Tally webhook endpoint: POST https://splitsteal.app/webhook/tally
+# Health check:           GET  https://splitsteal.app/webhook/health

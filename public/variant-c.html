@@ -9,7 +9,71 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#c9a84c" />
-  <meta name="description" content="Split or Steal launches March 22. The dinner bill game where strategy beats generosity." />
+  <meta name="description" content="Split or Steal launches March 22 — the bill splitting app that uses game theory to make group expenses fair. Split dinner bills, rent, and shared costs with secret voting." />
+  <meta name="keywords" content="bill splitting app, split the bill, expense splitting, group dinner bill, fair bill split, game theory, split or steal, launch, coming soon" />
+  <link rel="canonical" href="https://splitsteal.app" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Split or Steal",
+        "operatingSystem": "iOS",
+        "applicationCategory": "FinanceApplication",
+        "description": "The bill splitting app that uses game theory to make group expenses fair. Launching March 22, 2026.",
+        "url": "https://splitsteal.app",
+        "image": "https://splitsteal.app/og-image-vc.webp",
+        "author": {
+          "@type": "Organization",
+          "name": "0xscrubbed",
+          "url": "https://0xscrubbed.xyz"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "4.99",
+          "priceCurrency": "USD",
+          "category": "Subscription"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the fairest way to split a bill?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The fairest way to split a bill is to let everyone vote secretly on whether to split fairly or take advantage. Split or Steal uses game theory — if someone tries to underpay, they face an automatic Steal Tax penalty."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When does Split or Steal launch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Split or Steal launches on March 22, 2026 on the iOS App Store. Join the waitlist at splitsteal.app to get notified on launch day."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does game theory apply to splitting bills?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Split or Steal applies the Prisoner's Dilemma to bill splitting. Each person secretly votes to Split (cooperate) or Steal (defect). The Nash equilibrium favours cooperation because Stealing triggers penalties, making fairness the dominant strategy."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "name": "0xscrubbed",
+        "url": "https://0xscrubbed.xyz",
+        "sameAs": ["https://x.com/0xscrubbed"]
+      }
+    ]
+  }
+  </script>
   <meta property="og:title" content="Split or Steal launches in days. Are you in?" />
   <meta property="og:description" content="Everyone secretly picks Split or Steal. Nobody knows what the others chose. Then the bill reveals everything." />
   <meta property="og:type" content="website" />
@@ -91,7 +155,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.75) 40%, rgba(5,5,5,0.95) 100%);
+      background: linear-gradient(to bottom, rgba(5,5,5,0.18) 0%, rgba(5,5,5,0.35) 35%, rgba(5,5,5,0.82) 65%, rgba(5,5,5,0.97) 100%);
       pointer-events: none;
     }
 
@@ -124,7 +188,7 @@
       text-transform: uppercase;
       letter-spacing: 0.18em;
       color: var(--accent);
-      background: rgba(201,164,74,0.06);
+      background: rgba(5,5,5,0.85);
       margin-bottom: 2rem;
       animation: pillGlow 3s ease-in-out infinite;
     }
@@ -135,6 +199,24 @@
       border-radius: 50%;
       animation: blink 1.5s ease-in-out infinite;
     }
+
+    /* Social proof badge */
+    .social-proof-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      background: rgba(5,5,5,0.85);
+      margin-bottom: 1.25rem;
+    }
+
+    .social-proof-badge .fire { font-size: 0.7rem; }
 
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
@@ -153,35 +235,45 @@
       opacity: 0;
       transform: translateY(20px);
       animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    }
+
+    .hero-text .light {
+      font-weight: 200;
+      font-style: normal;
+      letter-spacing: -0.03em;
     }
 
     .hero-text em {
       font-style: italic;
+      font-weight: 800;
       color: var(--accent);
-      text-shadow: 0 0 60px rgba(201,164,74,0.25);
+      text-shadow: 0 0 80px rgba(201,164,74,0.35), 0 4px 40px rgba(0,0,0,0.5);
     }
 
     @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
 
     .hero-sub {
       font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: var(--text-secondary);
+      color: rgba(255,255,255,0.75);
       font-weight: 300;
       line-height: 1.7;
       max-width: 440px;
       margin-bottom: 3rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
 
     /* Countdown */
     .countdown {
       padding: 2.5rem 4rem;
-      border: 1px solid rgba(201,164,74,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
-      background: rgba(201,164,74,0.03);
+      background: rgba(10,10,10,0.9);
       margin-bottom: 3rem;
       width: 100%;
       max-width: 480px;
       animation: pillGlow 3s ease-in-out infinite;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
     }
 
     .countdown-label {
@@ -298,9 +390,9 @@
       position: relative;
       width: 100%;
       aspect-ratio: 393 / 852;
-      background: #111;
+      background: #0a0a0a;
       border-radius: 44px;
-      border: 2px solid #2a2a2a;
+      border: 2px solid #222;
       box-shadow:
         0 0 0 1px #0a0a0a,
         inset 0 0 0 1px rgba(255,255,255,0.08),
@@ -417,17 +509,18 @@
       width: 100%;
       max-width: 420px;
       margin-bottom: 1rem;
-      padding: 2rem 2rem;
-      border: 1px solid rgba(201,164,74,0.1);
-      border-radius: 16px;
-      background: rgba(201,164,74,0.02);
+      padding: 1.75rem 2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      background: rgba(10,10,10,0.92);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
     .signup-section iframe { border-radius: 12px; }
 
     .signup-label {
       font-size: 0.75rem;
-      color: var(--text-dim);
+      color: rgba(255,255,255,0.55);
       margin-bottom: 0.75rem;
       letter-spacing: 0.02em;
     }
@@ -602,7 +695,7 @@
     }
 
     .testimonial-card {
-      background: rgba(10,10,10,0.85);
+      background: var(--bg);
       padding: 1.75rem 1.5rem;
       transition: background 0.3s ease;
     }
@@ -635,12 +728,16 @@
   <div class="page-wrapper">
   <div class="page">
 
+    <div class="social-proof-badge">
+      <span class="fire">🔥</span> 25 spots remaining on the waitlist
+    </div>
+
     <div class="launch-pill">
       <span class="dot"></span>
       LAUNCHING MARCH 22
     </div>
 
-    <h1 class="hero-text">Split or<br><em>Steal.</em></h1>
+    <h1 class="hero-text"><span class="light">Split or</span><br><em>Steal.</em></h1>
 
     <p class="hero-sub reveal">
       Not credit card roulette — this is game theory. Everyone picks split or steal. Your outcome depends on your read of the room. Then the truth comes out.
@@ -673,6 +770,24 @@
       <div class="countdown-live" id="countdown-live">LIVE NOW</div>
     </div>
 
+    <!-- Early Signup — above screenshots for CVR -->
+    <div class="signup-section reveal">
+      <p class="signup-label">Be first in. Just your email.</p>
+      <iframe
+        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        width="100%"
+        height="120"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Split or Steal signup"
+      ></iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+    </div>
+
+    <p class="fine reveal">No spam. Just launch updates.</p>
+
     <!-- App screenshots -->
     <div class="screens-section reveal">
       <div class="screens-heading">How it works</div>
@@ -680,42 +795,26 @@
         <div class="screen-wrap">
           <div class="iphone-frame">
             <div class="iphone-screen">
-              <img src="/screenshots/mockup-home-dashboard.jpg" alt="Home dashboard — Total Saved and recent games" loading="lazy" />
+              <img src="/screenshots/home-dashboard.jpg" alt="Home Dashboard — Total Saved, stats, recent games" loading="lazy" />
             </div>
           </div>
-          <p class="screen-caption">Home</p>
-        </div>
-        <div class="screen-wrap">
-          <div class="iphone-frame">
-            <div class="iphone-screen">
-              <img src="/screenshots/mockup-new-game.jpg" alt="New Game setup — bill, players, Steal Tax" loading="lazy" />
-            </div>
-          </div>
-          <p class="screen-caption">Setup</p>
+          <p class="screen-caption">Set Up</p>
         </div>
         <div class="screen-wrap center-wrap">
           <div class="iphone-frame">
             <div class="iphone-screen">
-              <img src="/screenshots/mockup-join-game.jpg" alt="Join Game via QR or 6-digit code" loading="lazy" />
+              <img src="/screenshots/decision-split-steal.jpg" alt="The Vote — Split or Steal, countdown timer, everyone decides secretly" loading="lazy" />
             </div>
           </div>
-          <p class="screen-caption">Join</p>
+          <p class="screen-caption">The Vote</p>
         </div>
         <div class="screen-wrap">
           <div class="iphone-frame">
             <div class="iphone-screen">
-              <img src="/screenshots/mockup-leaderboard.jpg" alt="Leaderboard with podium and rankings" loading="lazy" />
+              <img src="/screenshots/reveal-someone-stole.jpg" alt="The Reveal — someone stole, see who and what they owe" loading="lazy" />
             </div>
           </div>
-          <p class="screen-caption">Rankings</p>
-        </div>
-        <div class="screen-wrap">
-          <div class="iphone-frame">
-            <div class="iphone-screen">
-              <img src="/screenshots/mockup-chaos-mode.jpg" alt="Chaos mode with Negotiation Window" loading="lazy" />
-            </div>
-          </div>
-          <p class="screen-caption">Chaos</p>
+          <p class="screen-caption">Results</p>
         </div>
       </div>
     </div>
@@ -772,23 +871,10 @@
       </div>
     </div>
 
-    <!-- Signup -->
-    <div class="signup-section reveal">
-      <p class="signup-label">Be first in. Just your email.</p>
-      <iframe
-        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        loading="lazy"
-        width="100%"
-        height="120"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title="Split or Steal signup"
-      ></iframe>
-      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+    <!-- Bottom CTA -->
+    <div class="reveal" style="margin-bottom:2rem;text-align:center;">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;background:linear-gradient(135deg,#e4c76b,#c9a44a,#b8933c);color:#000;font-weight:600;font-size:0.95rem;border-radius:60px;text-decoration:none;transition:transform 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.5);">Sign up &uarr;</a>
     </div>
-
-    <p class="fine reveal">No spam. Just launch updates.</p>
 
   </div>
   </div>
@@ -936,6 +1022,50 @@
       var utmData = {};
       utmKeys.forEach(function(k) { if (params.get(k)) utmData[k] = params.get(k); });
       if (Object.keys(utmData).length && window.posthog) posthog.register(utmData);
+    })();
+  </script>
+
+  <!-- Tally popup embed -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <!-- Sticky bottom banner — appears after 5s scrolling -->
+  <div id="sticky-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:9000;padding:0.85rem 1.5rem;background:rgba(10,10,10,0.96);border-top:1px solid rgba(201,164,74,0.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);">
+    <span style="font-size:0.85rem;color:#a0a0a0;font-weight:300;">Still thinking?</span>
+    <button onclick="document.getElementById('sticky-banner').style.transform='translateY(100%)';document.querySelector('.signup-section').scrollIntoView({behavior:'smooth',block:'center'});" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.65rem 1.5rem;background:linear-gradient(135deg,#e4c76b,#c9a44a,#b8933c);color:#000;font-weight:600;font-size:0.85rem;border-radius:60px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">Get early access →</button>
+    <button onclick="document.getElementById('sticky-banner').style.transform='translateY(100%)'" style="background:none;border:none;color:#606060;cursor:pointer;font-size:1.2rem;line-height:1;padding:0.2rem;">&times;</button>
+  </div>
+
+  <!-- Exit-intent + sticky banner logic -->
+  <script>
+    (function() {
+      // Exit-intent popup
+      var exitFired = false;
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 50 && !exitFired) {
+          exitFired = true;
+          if (window.Tally) {
+            Tally.openPopup('wMbzoK');
+          }
+          if (window.posthog) posthog.capture('exit_intent_popup', { variant: 'C' });
+        }
+      });
+
+      // Sticky bottom banner — slide in after 5s
+      var bannerShown = false;
+      var bannerEl = document.getElementById('sticky-banner');
+
+      function showBanner() {
+        if (bannerShown) return;
+        bannerShown = true;
+        bannerEl.style.transform = 'translateY(0)';
+        if (window.posthog) posthog.capture('sticky_banner_shown', { variant: 'C' });
+      }
+
+      setTimeout(showBanner, 5000);
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) showBanner();
+      }, { passive: true });
     })();
   </script>
 
