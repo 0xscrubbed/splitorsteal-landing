@@ -90,7 +90,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://pbs.twimg.com" crossorigin />
-  <link rel="preconnect" href="https://tally.so" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
   <!-- Preload hero background image (LCP candidate) — WebP only -->
@@ -516,7 +515,36 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
-    .signup-section iframe { border-radius: 12px; }
+    .signup-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .email-input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-input::placeholder { color: var(--text-dim); }
+    .email-input:focus { border-color: rgba(201,164,74,0.5); }
+    .cta-button {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #e4c76b, #c9a44a, #b8933c);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-button:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+    .cta-button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .signup-label {
       font-size: 0.75rem;
@@ -773,17 +801,11 @@
     <!-- Early Signup — above screenshots for CVR -->
     <div class="signup-section reveal">
       <p class="signup-label">Be first in. Just your email.</p>
-      <iframe
-        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        loading="lazy"
-        width="100%"
-        height="120"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title="Split or Steal signup"
-      ></iframe>
-      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+      <form class="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" placeholder="Enter your email" required class="email-input" />
+        <button type="submit" class="cta-button">Join Waitlist</button>
+        <p class="signup-success" style="display:none;color:#FFD700;margin-top:8px;text-align:center;">You're in! We'll be in touch.</p>
+      </form>
     </div>
 
     <p class="fine reveal">No spam. Just launch updates.</p>
@@ -917,11 +939,6 @@
         });
       });
 
-      window.addEventListener('message', function(e) {
-        if (e.data && typeof e.data === 'object' && e.data.event === 'Tally.FormSubmitted') {
-          if (window.posthog) posthog.capture('tally_signup', { form_id: e.data.payload && e.data.payload.formId });
-        }
-      });
     })();
   </script>
 
@@ -1025,9 +1042,6 @@
     })();
   </script>
 
-  <!-- Tally popup embed -->
-  <script async src="https://tally.so/widgets/embed.js"></script>
-
   <!-- Sticky bottom banner — appears after 5s scrolling -->
   <div id="sticky-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:9000;padding:0.85rem 1.5rem;background:rgba(10,10,10,0.96);border-top:1px solid rgba(201,164,74,0.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);">
     <span style="font-size:0.85rem;color:#a0a0a0;font-weight:300;">Still thinking?</span>
@@ -1043,9 +1057,7 @@
       document.addEventListener('mouseleave', function(e) {
         if (e.clientY < 50 && !exitFired) {
           exitFired = true;
-          if (window.Tally) {
-            Tally.openPopup('wMbzoK');
-          }
+          document.querySelector('.signup-form').scrollIntoView({behavior: 'smooth'});
           if (window.posthog) posthog.capture('exit_intent_popup', { variant: 'C' });
         }
       });
@@ -1069,5 +1081,36 @@
     })();
   </script>
 
+  <script>
+    async function handleSignup(e) {
+      e.preventDefault();
+      var form = e.target;
+      var email = form.querySelector('input[type="email"]').value;
+      var btn = form.querySelector('button[type="submit"]');
+      var success = form.querySelector('.signup-success');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+      try {
+        var resp = await fetch('https://capture.0xscrubbed.xyz/signup', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email: email, source: 'splitsteal-lander', idea: 'split-or-steal', variant: 'c'})
+        });
+        if (resp.ok || resp.status === 409) {
+          btn.style.display = 'none';
+          success.style.display = 'block';
+          if (window.posthog) posthog.capture('signup', {email: email, variant: 'c'});
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Join Waitlist';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch(err) {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+        alert('Something went wrong. Please try again.');
+      }
+    }
+  </script>
 </body>
 </html>

@@ -98,7 +98,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://pbs.twimg.com" crossorigin />
-  <link rel="preconnect" href="https://tally.so" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
   <!-- Preload hero background image (LCP candidate) — WebP only -->
@@ -492,7 +491,36 @@
       background: rgba(201,164,74,0.02);
     }
 
-    .tally-wrap iframe { border-radius: 12px; }
+    .signup-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .email-input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-input::placeholder { color: var(--text-dim); }
+    .email-input:focus { border-color: rgba(201,164,74,0.5); }
+    .cta-button {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #e4c76b, #c9a44a, #b8933c);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-button:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+    .cta-button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .fine {
       margin-top: 1rem;
@@ -786,17 +814,11 @@
       <p class="sub">Game theory. Secret votes. One reveal that changes dinner forever.</p>
       <div class="tally-wrap" style="margin-top:2rem;max-width:420px;margin-left:auto;margin-right:auto;padding:1.5rem 2rem;border:1px solid rgba(201,164,74,0.1);border-radius:16px;background:rgba(201,164,74,0.02);">
         <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:0.75rem;letter-spacing:0.02em;">just your email. that's it.</p>
-        <iframe
-          data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-          loading="lazy"
-          width="100%"
-          height="120"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="Split or Steal signup"
-        ></iframe>
-        <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+        <form class="signup-form" onsubmit="handleSignup(event)">
+          <input type="email" placeholder="Enter your email" required class="email-input" />
+          <button type="submit" class="cta-button">Join Waitlist</button>
+          <p class="signup-success" style="display:none;color:#FFD700;margin-top:8px;text-align:center;">You're in! We'll be in touch.</p>
+        </form>
         <p class="fine" style="margin-top:0.75rem;">No spam. Just launch updates.</p>
       </div>
     </div>
@@ -930,11 +952,6 @@
         });
       });
 
-      window.addEventListener('message', function(e) {
-        if (e.data && typeof e.data === 'object' && e.data.event === 'Tally.FormSubmitted') {
-          if (window.posthog) posthog.capture('tally_signup', { form_id: e.data.payload && e.data.payload.formId });
-        }
-      });
     })();
   </script>
 
@@ -1002,5 +1019,36 @@
     })();
   </script>
 
+  <script>
+    async function handleSignup(e) {
+      e.preventDefault();
+      var form = e.target;
+      var email = form.querySelector('input[type="email"]').value;
+      var btn = form.querySelector('button[type="submit"]');
+      var success = form.querySelector('.signup-success');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+      try {
+        var resp = await fetch('https://capture.0xscrubbed.xyz/signup', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email: email, source: 'splitsteal-lander', idea: 'split-or-steal', variant: 'b'})
+        });
+        if (resp.ok || resp.status === 409) {
+          btn.style.display = 'none';
+          success.style.display = 'block';
+          if (window.posthog) posthog.capture('signup', {email: email, variant: 'b'});
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Join Waitlist';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch(err) {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+        alert('Something went wrong. Please try again.');
+      }
+    }
+  </script>
 </body>
 </html>
