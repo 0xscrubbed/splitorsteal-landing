@@ -720,6 +720,268 @@
     @media (max-width: 480px) {
       .testimonials-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── 3-step capture form ── */
+    .capture-widget {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(201,164,74,0.15);
+      border-radius: 16px;
+      background: rgba(201,164,74,0.03);
+      text-align: left;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+
+    .step-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(201,164,74,0.12);
+      border: 1px solid rgba(201,164,74,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: rgba(201,164,74,0.5);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      background: rgba(201,164,74,0.25);
+      border-color: rgba(201,164,74,0.6);
+      color: var(--accent);
+    }
+
+    .step-dot.done {
+      background: rgba(201,164,74,0.35);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(201,164,74,0.12);
+    }
+
+    .capture-step { display: none; }
+    .capture-step.active { display: block; }
+
+    .capture-step input[type="email"],
+    .capture-step textarea,
+    .capture-step select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .capture-step input[type="email"]:focus,
+    .capture-step textarea:focus,
+    .capture-step select:focus {
+      border-color: rgba(201,164,74,0.5);
+      box-shadow: 0 0 0 3px rgba(201,164,74,0.08);
+    }
+
+    .capture-step select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    .capture-step select option { background: #1a1a1a; color: var(--text); }
+
+    .capture-step textarea {
+      resize: none;
+      height: 90px;
+      line-height: 1.5;
+    }
+
+    .capture-step label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .capture-btn {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      margin-top: 0.75rem;
+      background: linear-gradient(135deg, #e4c76b, #c9a44a, #b8933c);
+      color: #000;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .capture-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,164,74,0.25); }
+    .capture-btn:active { transform: translateY(0); }
+    .capture-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .skip-link {
+      display: block;
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .skip-link:hover { color: var(--text-secondary); }
+
+    /* ── Referral widget ── */
+    .referral-widget {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(201,164,74,0.04);
+      border: 1px solid rgba(201,164,74,0.18);
+      border-radius: 16px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .referral-widget .check-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #16a34a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .referral-widget .check-icon svg {
+      width: 24px; height: 24px;
+      stroke: #fff; stroke-width: 3; fill: none;
+    }
+
+    .referral-widget h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .referral-widget .tagline {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      line-height: 1.55;
+    }
+
+    .ref-link-box {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .ref-link-text {
+      flex: 1;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .ref-copy-btn {
+      padding: 0.6rem 0.875rem;
+      background: rgba(201,164,74,0.15);
+      border: none;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+      min-height: 40px;
+    }
+
+    .ref-copy-btn:hover { background: rgba(201,164,74,0.25); }
+
+    .ref-share-btns {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .ref-share-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      min-height: 44px;
+    }
+
+    .ref-share-btn.x-btn {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .ref-share-btn.x-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+
+    .ref-share-btn.wa-btn {
+      background: rgba(37,211,102,0.08);
+      border-color: rgba(37,211,102,0.2);
+      color: #25d366;
+    }
+
+    .ref-share-btn.wa-btn:hover { background: rgba(37,211,102,0.15); }
+
+    .ref-count {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .ref-count strong { color: var(--accent); }
   </style>
 
 </head>
@@ -770,20 +1032,65 @@
       <div class="countdown-live" id="countdown-live">LIVE NOW</div>
     </div>
 
-    <!-- Early Signup — above screenshots for CVR -->
-    <div class="signup-section reveal">
+    <!-- Early Signup — 3-step form -->
+    <div class="signup-section reveal" id="signup">
       <p class="signup-label">Be first in. Just your email.</p>
-      <iframe
-        data-tally-src="https://tally.so/embed/7RDLEP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        loading="lazy"
-        width="100%"
-        height="120"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title="Split or Steal signup"
-      ></iframe>
-      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+
+      <div class="capture-widget" id="capture-widget-main">
+        <div class="step-indicator" aria-label="Form progress">
+          <div class="step-dot active" id="sdot-main-1">1</div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="sdot-main-2">2</div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="sdot-main-3">3</div>
+          <span style="margin-left:0.25rem;">Step <span id="step-label-main">1</span> of 3</span>
+        </div>
+        <div class="capture-step active" id="step-main-1">
+          <label for="email-main">Your email address</label>
+          <input type="email" id="email-main" placeholder="you@example.com" autocomplete="email" inputmode="email" required />
+          <button class="capture-btn" onclick="captureNext('main', 1)">Continue &rarr;</button>
+        </div>
+        <div class="capture-step" id="step-main-2">
+          <label for="pain-main">What's your biggest challenge when splitting bills with friends?</label>
+          <textarea id="pain-main" placeholder="e.g. Someone always underpays, awkward to bring it up..." rows="3"></textarea>
+          <button class="capture-btn" onclick="captureNext('main', 2)">Continue &rarr;</button>
+          <span class="skip-link" onclick="captureSkip('main', 2)">Skip this step</span>
+        </div>
+        <div class="capture-step" id="step-main-3">
+          <label for="solving-main">How are you handling it today?</label>
+          <select id="solving-main">
+            <option value="" disabled selected>Pick one...</option>
+            <option value="Nothing">Nothing — I just let it go</option>
+            <option value="Spreadsheet">Spreadsheet or calculator</option>
+            <option value="Another app">Another app (Splitwise, etc.)</option>
+            <option value="Manual calculation">Manual calculation on the night</option>
+            <option value="Other">Other</option>
+          </select>
+          <button class="capture-btn" id="btn-main-3" onclick="captureSubmit('main')">Get Early Access</button>
+          <span class="skip-link" onclick="captureSubmit('main')">Skip &amp; join waitlist</span>
+        </div>
+      </div>
+
+      <div class="referral-widget" id="ref-widget-main">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>You're on the list.</h3>
+        <p class="tagline">Move up the waitlist — share your link to jump the queue.</p>
+        <div class="ref-link-box">
+          <span class="ref-link-text" id="ref-url-main">loading...</span>
+          <button class="ref-copy-btn" onclick="copyRefLink('main')">Copy</button>
+        </div>
+        <div class="ref-share-btns">
+          <button class="ref-share-btn x-btn" onclick="shareOnX('main')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.628L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+            Share on X
+          </button>
+          <button class="ref-share-btn wa-btn" onclick="shareOnWhatsApp('main')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </button>
+        </div>
+        <p class="ref-count"><strong id="ref-count-main">0</strong> people joined using your link</p>
+      </div>
     </div>
 
     <p class="fine reveal">No spam. Just launch updates.</p>
@@ -917,12 +1224,124 @@
         });
       });
 
-      window.addEventListener('message', function(e) {
-        if (e.data && typeof e.data === 'object' && e.data.event === 'Tally.FormSubmitted') {
-          if (window.posthog) posthog.capture('tally_signup', { form_id: e.data.payload && e.data.payload.formId });
-        }
-      });
     })();
+  </script>
+
+  <!-- 3-step capture form + referral logic -->
+  <script>
+    var CAPTURE_URL = 'https://capture.0xscrubbed.xyz/signup';
+    var REFCOUNT_URL = 'https://capture.0xscrubbed.xyz/refcount';
+    var IDEA_SLUG = 'split-or-steal';
+    var _captureEmail = {};
+
+    function captureNext(id, step) {
+      if (step === 1) {
+        var emailEl = document.getElementById('email-' + id);
+        var email = (emailEl ? emailEl.value : '').trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+          emailEl && (emailEl.style.borderColor = '#e05252');
+          setTimeout(function() { emailEl && (emailEl.style.borderColor = ''); }, 1500);
+          return;
+        }
+        _captureEmail[id] = email;
+      }
+      var cur = document.getElementById('step-' + id + '-' + step);
+      var next = document.getElementById('step-' + id + '-' + (step + 1));
+      if (cur) cur.classList.remove('active');
+      if (next) next.classList.add('active');
+      var nextStep = step + 1;
+      var label = document.getElementById('step-label-' + id);
+      if (label) label.textContent = nextStep;
+      [1, 2, 3].forEach(function(d) {
+        var dot = document.getElementById('sdot-' + id + '-' + d);
+        if (!dot) return;
+        dot.classList.remove('active', 'done');
+        if (d < nextStep) dot.classList.add('done');
+        if (d === nextStep) dot.classList.add('active');
+      });
+    }
+
+    function captureSkip(id, step) {
+      var painEl = document.getElementById('pain-' + id);
+      if (painEl) painEl.value = '';
+      captureNext(id, step);
+    }
+
+    function captureSubmit(id) {
+      var btn = document.getElementById('btn-' + id + '-3');
+      if (btn) { btn.disabled = true; btn.textContent = 'Joining...'; }
+
+      var email = _captureEmail[id] || '';
+      var pain = (document.getElementById('pain-' + id) || {}).value || '';
+      var solving = (document.getElementById('solving-' + id) || {}).value || '';
+      pain = pain.trim();
+
+      var params = new URLSearchParams(window.location.search);
+      var fd = new FormData();
+      fd.append('email', email);
+      fd.append('idea_slug', IDEA_SLUG);
+      if (pain) fd.append('pain_point', pain);
+      if (solving) fd.append('how_solving', solving);
+      var ref = params.get('ref'); if (ref) fd.append('ref', ref);
+      var src = params.get('utm_source'); if (src) fd.append('utm_source', src);
+      var med = params.get('utm_medium'); if (med) fd.append('utm_medium', med);
+      var cam = params.get('utm_campaign'); if (cam) fd.append('utm_campaign', cam);
+      if (window.posthog) { try { var did = posthog.get_distinct_id(); if (did) fd.append('ph_cid', did); } catch(e) {} }
+
+      fetch(CAPTURE_URL, { method: 'POST', body: fd })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          showRefWidget(id, email, data);
+          if (window.posthog) posthog.capture('capture_signup', { idea_slug: IDEA_SLUG, has_pain_point: !!pain, has_solving: !!solving });
+        })
+        .catch(function() {
+          if (btn) { btn.disabled = false; btn.textContent = 'Get Early Access'; }
+          showRefWidget(id, email, null);
+        });
+    }
+
+    function showRefWidget(id, email, data) {
+      var widget = document.getElementById('capture-widget-' + id);
+      var refWidget = document.getElementById('ref-widget-' + id);
+      if (widget) widget.style.display = 'none';
+      if (refWidget) refWidget.style.display = 'block';
+      var refLink = (data && data.referral_link) ? data.referral_link : 'https://splitsteal.app';
+      var urlEl = document.getElementById('ref-url-' + id);
+      if (urlEl) urlEl.textContent = refLink;
+      if (refWidget) refWidget.dataset.refLink = refLink;
+      if (data && data.referral_link && email) {
+        fetch(REFCOUNT_URL + '?email=' + encodeURIComponent(email))
+          .then(function(r) { return r.json(); })
+          .then(function(d) { var el = document.getElementById('ref-count-' + id); if (el && d) el.textContent = d.count || 0; })
+          .catch(function(){});
+      }
+    }
+
+    function copyRefLink(id) {
+      var w = document.getElementById('ref-widget-' + id);
+      var link = w ? w.dataset.refLink : '';
+      if (!link) return;
+      var btn = w.querySelector('.ref-copy-btn');
+      (navigator.clipboard ? navigator.clipboard.writeText(link) : Promise.reject())
+        .then(function() { if (btn) { btn.textContent = 'Copied!'; setTimeout(function() { btn.textContent = 'Copy'; }, 2000); } })
+        .catch(function() {
+          var ta = document.createElement('textarea');
+          ta.value = link; ta.style.cssText = 'position:fixed;opacity:0;'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+          if (btn) { btn.textContent = 'Copied!'; setTimeout(function() { btn.textContent = 'Copy'; }, 2000); }
+        });
+    }
+
+    function shareOnX(id) {
+      var w = document.getElementById('ref-widget-' + id);
+      var link = w ? w.dataset.refLink : 'https://splitsteal.app';
+      window.open('https://x.com/intent/tweet?text=' + encodeURIComponent('Ever split a bill with someone who always underpays? Split or Steal uses game theory to expose freeloaders. Coming soon: ' + link), '_blank', 'noopener');
+    }
+
+    function shareOnWhatsApp(id) {
+      var w = document.getElementById('ref-widget-' + id);
+      var link = w ? w.dataset.refLink : 'https://splitsteal.app';
+      window.open('https://wa.me/?text=' + encodeURIComponent('Split or Steal — game theory bill splitting. Everyone picks split or steal, then the truth comes out. ' + link), '_blank', 'noopener');
+    }
   </script>
 
   <!-- Countdown Timer -->

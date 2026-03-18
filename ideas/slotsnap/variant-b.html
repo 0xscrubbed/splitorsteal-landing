@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlotSnap — Find and Book a Tradie Without the Phone Tag.</title>
+  <meta name="description" content="Join 34 homeowners already on the SlotSnap waitlist. Book a local tradie in 60 seconds — real-time availability, upfront pricing, no phone tag." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/slotsnap/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SlotSnap — Find and Book a Tradie Without the Phone Tag." />
+  <meta property="og:description" content="Join 34 homeowners already on the SlotSnap waitlist. Real-time tradie availability. Upfront pricing. Book in 60 seconds." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/slotsnap/" />
+  <meta property="og:site_name" content="SlotSnap" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SlotSnap — Find and Book a Tradie Without the Phone Tag." />
+  <meta name="twitter:description" content="34 homeowners already on the waitlist. Book a tradie in 60 seconds." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"SlotSnap","description":"Book a local tradie in 60 seconds. Real-time availability, upfront pricing, no phone tag.","url":"https://0xscrubbed.xyz/ideas/slotsnap/","applicationCategory":"LifestyleApplication","operatingSystem":"iOS, Android","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","availability":"https://schema.org/PreOrder"},"author":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What tradies are available on SlotSnap?","acceptedAnswer":{"@type":"Answer","text":"SlotSnap covers the most common trades: plumbers, electricians, carpenters, handymen, painters, and tilers. We are adding more trade categories based on demand."}},{"@type":"Question","name":"How does real-time availability work?","acceptedAnswer":{"@type":"Answer","text":"Tradies on SlotSnap update their calendar live. You only see tradies who are actually free in your area and timeframe — no calling to check."}},{"@type":"Question","name":"Is SlotSnap free to use?","acceptedAnswer":{"@type":"Answer","text":"Free for homeowners to sign up and browse. Tradies pay a small platform fee per confirmed booking."}},{"@type":"Question","name":"When is SlotSnap launching?","acceptedAnswer":{"@type":"Answer","text":"We are currently in development. Join the waitlist to be first notified when SlotSnap goes live in your area."}},{"@type":"Question","name":"What cities will SlotSnap launch in first?","acceptedAnswer":{"@type":"Answer","text":"We are planning to launch first in Melbourne and Sydney, with other cities to follow based on waitlist demand."}}]}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D1117;
+      --bg-card: #161b22;
+      --bg-card-hover: #1c2330;
+      --text: #e6edf3;
+      --text-muted: #7d8590;
+      --accent: #3B82F6;
+      --accent-glow: rgba(59, 130, 246, 0.18);
+      --accent-hover: #60a5fa;
+      --accent-subtle: rgba(59, 130, 246, 0.08);
+      --success: #3fb950;
+      --border: #21262d;
+      --radius: 12px;
+      --max-width: 820px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13, 17, 23, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.65rem;
+      text-decoration: none; color: var(--text); font-weight: 700; font-size: 1rem;
+    }
+    .nav-cta {
+      padding: 0.45rem 1.2rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* Social Proof Strip */
+    .proof-strip {
+      margin-top: 64px;
+      background: linear-gradient(90deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.04) 100%);
+      border-bottom: 1px solid rgba(59,130,246,0.2);
+      padding: 0.9rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .proof-strip strong { color: var(--accent); }
+    .proof-strip .avatars {
+      display: inline-flex; align-items: center; gap: -4px;
+      margin-right: 0.6rem; vertical-align: middle;
+    }
+    .avatar-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--bg);
+      margin-right: -8px;
+      font-size: 0.65rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .av1 { background: #3B82F6; }
+    .av2 { background: #10B981; }
+    .av3 { background: #F59E0B; }
+    .av4 { background: #EC4899; }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 1.5rem 5rem;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+      max-width: 680px; margin-bottom: 1.25rem;
+    }
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero .subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--text-muted); max-width: 520px;
+      margin-bottom: 2.5rem; line-height: 1.6;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex; gap: 1rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.5rem;
+      text-align: center; min-width: 130px;
+    }
+    .stat-card .stat-num {
+      font-size: 1.8rem; font-weight: 800; color: var(--accent);
+      display: block; letter-spacing: -0.03em;
+    }
+    .stat-card .stat-label {
+      font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Form */
+    .capture-wrap { width: 100%; max-width: 440px; }
+    .capture-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .capture-form input[type="email"] {
+      width: 100%; padding: 0.95rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text); font-size: 1rem;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .capture-form input:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .capture-form button {
+      width: 100%; padding: 1rem;
+      border: none; border-radius: var(--radius);
+      background: var(--accent); color: #fff;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .capture-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius);
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 5rem 0; border-top: 1px solid var(--border);
+    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem;
+    }
+    .testimonials-section h2 {
+      font-size: 1.8rem; font-weight: 700; margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+    }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .tcard {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .tcard .stars { color: #F59E0B; font-size: 0.85rem; margin-bottom: 0.85rem; }
+    .tcard blockquote {
+      font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;
+      color: var(--text); font-style: italic;
+    }
+    .tcard .attribution { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+
+    /* Comparison */
+    .comparison-section { padding: 5rem 0; border-top: 1px solid var(--border); }
+    .comparison-section h2 {
+      font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .comparison-section .section-sub {
+      color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem;
+    }
+    .comparison-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .cmp-col {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .cmp-col.cmp-good { border-color: rgba(59,130,246,0.4); }
+    .cmp-col h3 {
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 1.25rem;
+    }
+    .cmp-col.cmp-bad h3 { color: var(--text-muted); }
+    .cmp-col.cmp-good h3 { color: var(--accent); }
+    .cmp-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .cmp-list li { font-size: 0.88rem; line-height: 1.5; display: flex; gap: 0.6rem; align-items: flex-start; }
+    .cmp-list li .icon { flex-shrink: 0; margin-top: 1px; }
+    .cmp-bad .icon { color: #f85149; }
+    .cmp-good .icon { color: var(--success); }
+
+    /* FAQ */
+    .faq-section { padding: 5rem 0; border-top: 1px solid var(--border); }
+    .faq-section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; letter-spacing: -0.02em; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    }
+    .faq-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .faq-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      padding: 5rem 1.5rem; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .bottom-cta h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-wrap { margin: 0 auto; }
+
+    footer {
+      text-align: center; padding: 2rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 580px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+      .stats-row { gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/ideas/slotsnap/">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="6" width="22" height="20" rx="3" fill="#3B82F6" opacity="0.15" stroke="#3B82F6" stroke-width="1.5"/>
+        <rect x="2" y="6" width="22" height="7" rx="3" fill="#3B82F6" opacity="0.6"/>
+        <rect x="2" y="10" width="22" height="3" fill="#3B82F6" opacity="0.6"/>
+        <rect x="8" y="3" width="2.5" height="6" rx="1.25" fill="#3B82F6"/>
+        <rect x="15.5" y="3" width="2.5" height="6" rx="1.25" fill="#3B82F6"/>
+        <rect x="6" y="18" width="3" height="3" rx="1" fill="#3B82F6" opacity="0.5"/>
+        <rect x="11" y="18" width="3" height="3" rx="1" fill="#3B82F6" opacity="0.5"/>
+        <path d="M24 16l-5 7h4l-2 7 7-9h-5l1-5z" fill="#3B82F6"/>
+      </svg>
+      <span>SlotSnap</span>
+    </a>
+    <a class="nav-cta" href="#signup">Join the waitlist →</a>
+  </nav>
+
+  <!-- Social Proof Strip -->
+  <div class="proof-strip">
+    <span class="avatars">
+      <span class="avatar-dot av1">JR</span>
+      <span class="avatar-dot av2">KM</span>
+      <span class="avatar-dot av3">TP</span>
+      <span class="avatar-dot av4">SL</span>
+    </span>
+    <strong>34 homeowners</strong> across Melbourne and Sydney are already on the waitlist
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>The app <span class="accent">34 homeowners</span> are<br>waiting to use right now.</h1>
+    <p class="subheadline">SlotSnap is how you find and book a tradie without the phone tag. See who's available, see the price, confirm in 60 seconds.</p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-num">60s</span>
+        <span class="stat-label">Average booking time</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">34</span>
+        <span class="stat-label">On the waitlist</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Phone calls needed</span>
+      </div>
+    </div>
+
+    <div class="capture-wrap" id="signup">
+      <form class="capture-form" id="form-top" onsubmit="handleSubmit(event,'top')">
+        <input type="hidden" name="idea_slug" value="slotsnap" />
+        <input type="hidden" name="variant" value="b" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+        <button type="submit" id="btn-top">Join the waitlist →</button>
+        <p class="form-note">Free to join. Founding users get priority booking for the first 90 days.</p>
+      </form>
+      <div class="form-success" id="success-top">
+        <h3>You're in!</h3>
+        <p>Welcome to the SlotSnap waitlist. We'll be in touch when we launch in your area.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <div class="container">
+      <p class="section-label">What people are saying</p>
+      <h2>Why people can't wait for this to launch.</h2>
+      <div class="testimonials-grid">
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <blockquote>"I called seven plumbers last month before someone actually called me back. This idea is long overdue. The moment this is live in Melbourne I'm using it."</blockquote>
+          <div class="attribution">James R. — Homeowner, Melbourne</div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Waited three weeks for an electrician who kept pushing the job. I want to tap a button and see who is actually free, not who says they'll call me back."</blockquote>
+          <div class="attribution">Katie M. — Renter-turned-owner, Sydney</div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <blockquote>"The fact that I have to spend 40 minutes on the phone just to get a plumber out is insane. I signed up the second I saw this. Please launch soon."</blockquote>
+          <div class="attribution">Taryn P. — First home buyer, Brisbane</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="comparison-section">
+    <div class="container">
+      <p class="section-label">The old way vs SlotSnap</p>
+      <h2>Booking a tradie today is broken.</h2>
+      <p class="section-sub">Here is exactly what changes with SlotSnap.</p>
+      <div class="comparison-grid">
+        <div class="cmp-col cmp-bad">
+          <h3>Right now</h3>
+          <ul class="cmp-list">
+            <li><span class="icon">✗</span> <span>Google "plumber near me" and hope for the best</span></li>
+            <li><span class="icon">✗</span> <span>Call 5 numbers, leave 4 voicemails</span></li>
+            <li><span class="icon">✗</span> <span>Wait days for a callback that may never come</span></li>
+            <li><span class="icon">✗</span> <span>No idea what the price will be until they arrive</span></li>
+            <li><span class="icon">✗</span> <span>Tradie no-shows with no explanation</span></li>
+          </ul>
+        </div>
+        <div class="cmp-col cmp-good">
+          <h3>With SlotSnap</h3>
+          <ul class="cmp-list">
+            <li><span class="icon">✓</span> <span>See every available tradie in your area right now</span></li>
+            <li><span class="icon">✓</span> <span>Tap, read reviews, confirm — done</span></li>
+            <li><span class="icon">✓</span> <span>Instant booking confirmation in under 60 seconds</span></li>
+            <li><span class="icon">✓</span> <span>Price shown upfront before you commit</span></li>
+            <li><span class="icon">✓</span> <span>Accountability built in — tradies track their reputation</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Common questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>What tradies are available on SlotSnap?</h3>
+          <p>Plumbers, electricians, carpenters, handymen, painters, and tilers to start. More trade categories added based on waitlist demand — you can vote when you sign up.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How does real-time availability work?</h3>
+          <p>Tradies on SlotSnap keep their calendar live. You only see tradies who are actually free in your area right now — no calling to check.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is SlotSnap free for homeowners?</h3>
+          <p>Free to sign up and browse. Tradies pay a small platform fee per confirmed booking — that is what keeps it free for homeowners.</p>
+        </div>
+        <div class="faq-item">
+          <h3>When does SlotSnap launch?</h3>
+          <p>We are building right now. Waitlist members get priority access and are first to know when we launch in their area.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Which cities launch first?</h3>
+          <p>Melbourne and Sydney first, then we expand based on where waitlist demand is highest. Sign up and we will add your city to our map.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Join the 34 already waiting.</h2>
+      <p>Be among the first to book a tradie in 60 seconds. No spam, no commitment — just first access when we launch.</p>
+      <div class="capture-wrap">
+        <form class="capture-form" id="form-bottom" onsubmit="handleSubmit(event,'bottom')">
+          <input type="hidden" name="idea_slug" value="slotsnap" />
+          <input type="hidden" name="variant" value="b" />
+          <input type="hidden" name="utm_source" value="lander" />
+          <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+          <button type="submit" id="btn-bottom">Join the waitlist →</button>
+          <p class="form-note">Founding users get priority booking for the first 90 days.</p>
+        </form>
+        <div class="form-success" id="success-bottom">
+          <h3>You're in!</h3>
+          <p>We'll reach out when SlotSnap launches in your area.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by <a href="https://0xscrubbed.xyz" target="_blank" rel="noopener">@0xscrubbed</a></p>
+    <p style="margin-top:0.4rem">&copy; 2026 0xscrubbed</p>
+  </footer>
+
+  <script>
+    function handleSubmit(e, id) {
+      e.preventDefault();
+      var form = document.getElementById('form-' + id);
+      var btn = document.getElementById('btn-' + id);
+      var success = document.getElementById('success-' + id);
+      btn.disabled = true; btn.textContent = 'Joining...';
+      var payload = {
+        email: form.querySelector('input[type="email"]').value,
+        idea_slug: 'slotsnap',
+        variant: 'b'
+      };
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('utm_campaign')) payload.utm_campaign = params.get('utm_campaign');
+      if (params.get('utm_medium')) payload.utm_medium = params.get('utm_medium');
+      fetch('https://capture.0xscrubbed.xyz/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .catch(function() {})
+        .finally(function() {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        });
+    }
+  </script>
+
+</body>
+</html>

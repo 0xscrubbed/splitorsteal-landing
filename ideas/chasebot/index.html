@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChaseBot — You're Losing 15–30% of Billable Revenue to Unpaid Invoices</title>
+  <meta name="description" content="Freelancers lose thousands each year to unpaid invoices — not because clients won't pay, but because chasing is awkward, time-consuming, and easy to avoid. ChaseBot is an AI agent that monitors your outstanding invoices and handles follow-up automatically." />
+  <meta name="keywords" content="invoice chasing software, freelancer invoice tool, unpaid invoice automation, invoice follow-up AI, freelancer payment tool Australia" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="author" content="0xscrubbed" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/chasebot/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ChaseBot — You're Losing 15–30% of Billable Revenue to Unpaid Invoices" />
+  <meta property="og:description" content="An AI agent that monitors outstanding invoices and sends follow-ups at the right intervals and tone — so you never have to chase a client again." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/chasebot/" />
+  <meta property="og:site_name" content="ChaseBot" />
+  <meta property="og:image" content="https://0xscrubbed.xyz/avatar.webp" />
+  <meta property="og:locale" content="en_AU" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ChaseBot — Stop Losing Revenue to Unpaid Invoices" />
+  <meta name="twitter:description" content="AI invoice chasing agent for freelancers. Monitors, follows up, and escalates automatically." />
+  <meta name="twitter:image" content="https://0xscrubbed.xyz/avatar.webp" />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <link rel="alternate" hreflang="en-AU" href="https://0xscrubbed.xyz/ideas/chasebot/" />
+  <link rel="preconnect" href="https://capture.0xscrubbed.xyz" crossorigin />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ChaseBot","description":"AI invoice chasing agent for freelancers and contractors. Monitors outstanding invoices, sends follow-up emails at the right intervals, and escalates automatically.","url":"https://0xscrubbed.xyz/ideas/chasebot/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","availability":"https://schema.org/PreOrder"},"author":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is ChaseBot?","acceptedAnswer":{"@type":"Answer","text":"ChaseBot is an AI agent that monitors your outstanding invoices and automatically sends follow-up emails at the right intervals and tone. It escalates overdue invoices and keeps a full paper trail — without you lifting a finger."}},{"@type":"Question","name":"How much revenue do freelancers lose to unpaid invoices?","acceptedAnswer":{"@type":"Answer","text":"Studies and freelancer surveys consistently show 15–30% of billable work goes uncollected — primarily because chasing clients is uncomfortable and time-consuming. ChaseBot handles the entire follow-up process so nothing falls through the cracks."}},{"@type":"Question","name":"Is ChaseBot invoicing software?","acceptedAnswer":{"@type":"Answer","text":"No. ChaseBot is the collection layer — it works alongside your existing invoicing tools (Xero, FreshBooks, Wave, or even a spreadsheet). It monitors what's outstanding and handles the follow-up sequence so you don't have to."}},{"@type":"Question","name":"How does ChaseBot decide when and how to follow up?","acceptedAnswer":{"@type":"Answer","text":"ChaseBot uses configurable rules and AI tone-matching. It sends a friendly reminder at 3 days overdue, a firmer follow-up at 7 days, and escalates the tone and frequency as the invoice ages — all customisable."}},{"@type":"Question","name":"When will ChaseBot be available?","acceptedAnswer":{"@type":"Answer","text":"ChaseBot is currently in pre-launch. Join the waitlist to get early access and lock in founder pricing before the public launch."}},{"@type":"Question","name":"What types of freelancers is ChaseBot for?","acceptedAnswer":{"@type":"Answer","text":"ChaseBot is built for any independent professional who invoices clients: freelance designers, developers, copywriters, consultants, photographers, contractors, and anyone else who sends invoices and hates chasing them."}}]}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0802;
+      --bg-elevated: #0f0e08;
+      --bg-card: #161208;
+      --bg-card-hover: #1e1a0c;
+      --text: #f0ede5;
+      --text-muted: #9a9080;
+      --text-dim: #5a5245;
+      --accent: #E8851A;
+      --accent-glow: rgba(232, 133, 26, 0.22);
+      --accent-hover: #f5980a;
+      --accent-subtle: rgba(232, 133, 26, 0.10);
+      --success: #10e5a0;
+      --border: #241e10;
+      --border-subtle: #1a1608;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --max-width: 760px;
+      --transition: 0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 8, 2, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 800; font-size: 1.05rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.6rem; letter-spacing: -0.02em;
+    }
+    .nav-logo {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 0.8rem; color: #fff; letter-spacing: -0.02em; flex-shrink: 0;
+    }
+    .nav-cta {
+      padding: 0.5rem 1.25rem; background: var(--accent); color: #fff;
+      border: none; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background var(--transition);
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -20%; left: 50%;
+      transform: translateX(-50%); width: 800px; height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .stat-banner {
+      display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center;
+    }
+    .stat-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 0.75rem 1.25rem; text-align: center;
+    }
+    .stat-number { font-size: 1.6rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    .badge {
+      display: inline-block; background: var(--accent-subtle); color: var(--accent);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.4em 1.2em; border-radius: 100px; border: 1px solid rgba(232,133,26,0.25);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.5rem); font-weight: 900; line-height: 1.1;
+      max-width: 700px; margin-bottom: 1.25rem; letter-spacing: -0.03em;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero .subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--text-muted);
+      max-width: 520px; margin-bottom: 2.5rem; line-height: 1.65;
+    }
+
+    .capture-form {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      width: 100%; max-width: 440px;
+    }
+    .capture-form input[type="email"],
+    .capture-form textarea {
+      width: 100%; padding: 0.9rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text);
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .capture-form input:focus,
+    .capture-form textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .capture-form textarea { resize: vertical; line-height: 1.5; }
+    .capture-form textarea::placeholder { color: var(--text-dim); }
+    .capture-form button {
+      width: 100%; padding: 1rem; border: none; border-radius: var(--radius);
+      background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background var(--transition), transform 0.1s;
+    }
+    .capture-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.8rem; color: var(--text-dim); text-align: center; }
+
+    .social-proof {
+      margin-top: 1.75rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .scarcity { margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+
+    section { padding: 5rem 0; }
+    section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+    .problem-section { background: var(--bg-elevated); }
+    .problem-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2.5rem;
+    }
+    .problem-card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; }
+    .problem-stat {
+      display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;
+    }
+    .problem-stat-item {
+      flex: 1; min-width: 140px; background: var(--bg-elevated);
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem;
+    }
+    .problem-stat-item .num { font-size: 1.5rem; font-weight: 900; color: var(--accent); }
+    .problem-stat-item .desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    .features { background: var(--bg); }
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 540px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .feature-card:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+    .feature-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent-subtle); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+
+    .how-section { background: var(--bg-elevated); }
+    .steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+    .step { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .step-number {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem;
+    }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+    .faq-section { background: var(--bg); }
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .faq-item[open] { border-color: var(--accent); }
+    .faq-item summary {
+      padding: 1.25rem 1.5rem; cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--text-muted); }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item summary h3 { font-size: 1rem; font-weight: 600; }
+    .faq-item p { padding: 0 1.5rem 1.25rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+    .bottom-cta { text-align: center; background: var(--bg-elevated); }
+    .bottom-cta h2 { margin-bottom: 0.75rem; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-form { margin: 0 auto; }
+
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem 2rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius); max-width: 440px;
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    footer {
+      text-align: center; padding: 2.5rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) {
+      .hero { padding-top: 5rem; }
+      .stat-banner { gap: 0.75rem; }
+      .problem-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="https://0xscrubbed.xyz" aria-label="ChaseBot home">
+      <div class="nav-logo" aria-hidden="true">CB</div>
+      <span>ChaseBot</span>
+    </a>
+    <a class="nav-cta" href="#form-area">Join Waitlist</a>
+  </nav>
+
+  <section class="hero" role="banner">
+    <span class="badge">Pre-Launch</span>
+
+    <div class="stat-banner" aria-label="Key statistics">
+      <div class="stat-item">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">of billable work goes uncollected</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.2hrs</div>
+        <div class="stat-label">avg time wasted chasing monthly</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">71%</div>
+        <div class="stat-label">of freelancers give up before getting paid</div>
+      </div>
+    </div>
+
+    <h1>You're Losing Real Money to <em>Unpaid Invoices</em> Right Now</h1>
+    <p class="subheadline">ChaseBot is an AI agent that monitors your outstanding invoices and sends follow-up emails at the right intervals and tone — so you never have to awkwardly chase a client again.</p>
+
+    <div id="form-area">
+      <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+        <input type="hidden" name="idea_slug" value="chasebot" />
+        <input type="hidden" name="variant" value="a" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+        <textarea name="pain_point" placeholder="What's your biggest frustration with chasing unpaid invoices?" required aria-label="Your biggest challenge" rows="3"></textarea>
+        <button type="submit">Join Waitlist</button>
+        <p class="form-note">Free during beta. No spam, ever.</p>
+      </form>
+    </div>
+    <div id="form-success" class="form-success" role="status" aria-live="polite">
+      <h3>You're in.</h3>
+      <p>We'll be in touch when early access opens.</p>
+    </div>
+
+    <div class="social-proof">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Join <strong>284+</strong> freelancers already on the list</span>
+    </div>
+    <p class="scarcity">Founder pricing ends at 500 signups</p>
+  </section>
+
+  <section class="problem-section">
+    <div class="container">
+      <div class="problem-card">
+        <h2>The Problem</h2>
+        <p>Freelancers spend hours chasing unpaid invoices and often give up entirely — losing 15–30% of billable revenue. Chasing clients is uncomfortable, time-consuming, and easy to deprioritise. The result: money left on the table every month, from clients who would have paid if someone had just followed up.</p>
+        <div class="problem-stat">
+          <div class="problem-stat-item">
+            <div class="num">$8,400</div>
+            <div class="desc">Average annual revenue lost to uncollected invoices (AU freelancer earning $70k/yr)</div>
+          </div>
+          <div class="problem-stat-item">
+            <div class="num">3–5x</div>
+            <div class="desc">More likely to get paid when you follow up within 48 hours</div>
+          </div>
+          <div class="problem-stat-item">
+            <div class="num">0hrs</div>
+            <div class="desc">Time you'll spend chasing once ChaseBot is running</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>What ChaseBot Does</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 4h22v16H1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M1 4l11 9 11-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Automated follow-up sequences</strong> — sends reminders at 3, 7, 14 and 30 days overdue, with tone that escalates appropriately</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Invoice monitoring</strong> — connects to your invoicing tool and tracks every outstanding invoice in real time</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>Escalation engine</strong> — knows when to loop in a formal notice or suggest a payment plan, keeping your client relationship intact</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><p><strong>Full paper trail</strong> — every follow-up logged with timestamps and delivery receipts for any future dispute</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><p><strong>Works alongside your invoicing tool</strong> — not a replacement. Pairs with Xero, FreshBooks, Wave, or your own invoices</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Tone customisation</strong> — configure follow-up personality from professional to firm to friendly, matched to your brand voice</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Connect Your Invoicing Tool</h3>
+            <p>ChaseBot integrates with Xero, FreshBooks, Wave, or accepts direct invoice uploads. Setup takes under 5 minutes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Set Your Follow-Up Rules</h3>
+            <p>Choose your escalation schedule and tone. ChaseBot handles the rest — including knowing when to pause if a client says they're paying.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Get Paid. Stop Chasing.</h3>
+            <p>ChaseBot monitors every invoice and fires follow-ups automatically. You get notified when action is needed — otherwise, it just works.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary><h3>What is ChaseBot?</h3></summary>
+          <p>ChaseBot is an AI agent that monitors your outstanding invoices and automatically sends follow-up emails at the right intervals and tone. It escalates overdue invoices and keeps a full paper trail — without you lifting a finger.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>How much revenue do freelancers lose to unpaid invoices?</h3></summary>
+          <p>Studies and freelancer surveys consistently show 15–30% of billable work goes uncollected — primarily because chasing clients is uncomfortable and time-consuming. ChaseBot handles the entire follow-up process so nothing falls through the cracks.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>Is ChaseBot invoicing software?</h3></summary>
+          <p>No. ChaseBot is the collection layer — it works alongside your existing invoicing tools (Xero, FreshBooks, Wave, or even a spreadsheet). It monitors what's outstanding and handles the follow-up sequence so you don't have to.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>How does ChaseBot decide when and how to follow up?</h3></summary>
+          <p>ChaseBot uses configurable rules and AI tone-matching. It sends a friendly reminder at 3 days overdue, a firmer follow-up at 7 days, and escalates the tone and frequency as the invoice ages — all customisable.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>When will ChaseBot be available?</h3></summary>
+          <p>ChaseBot is currently in pre-launch. Join the waitlist to get early access and lock in founder pricing before the public launch.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>What types of freelancers is ChaseBot for?</h3></summary>
+          <p>ChaseBot is built for any independent professional who invoices clients: freelance designers, developers, copywriters, consultants, photographers, contractors, and anyone else who sends invoices and hates chasing them.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Stop Leaving Money on the Table</h2>
+      <p>ChaseBot handles every follow-up automatically. You focus on the work. It handles getting paid.</p>
+      <div id="form-area-bottom">
+        <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+          <input type="hidden" name="idea_slug" value="chasebot" />
+          <input type="hidden" name="variant" value="a" />
+          <input type="hidden" name="utm_source" value="lander_bottom" />
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+          <textarea name="pain_point" placeholder="What's your biggest invoice chasing problem?" required rows="3"></textarea>
+          <button type="submit">Join Waitlist</button>
+          <p class="form-note">Free during beta. No spam, ever.</p>
+        </form>
+      </div>
+      <div id="form-success-bottom" class="form-success" role="status" aria-live="polite">
+        <h3>You're in.</h3>
+        <p>We'll be in touch when early access opens.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://0xscrubbed.xyz">Home</a>
+      <a href="https://0xscrubbed.xyz/ideas/">All Ideas</a>
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">X / Twitter</a>
+    </nav>
+    <p>Built by <a href="https://0xscrubbed.xyz">@0xscrubbed</a> &middot; Independent builder, Australia</p>
+    <p style="margin-top:0.35rem">&copy; 2026 0xscrubbed &middot; ABN 15 381 436 058</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.capture-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button');
+        btn.disabled = true; btn.textContent = 'Submitting...';
+        var data = new FormData(form);
+        fetch(form.action, { method: 'POST', body: data })
+          .then(function(r) { return r.json().catch(function(){return{}}) })
+          .then(function() {
+            document.querySelectorAll('#form-area,#form-area-bottom').forEach(function(el){ el.style.display='none'; });
+            document.querySelectorAll('#form-success,#form-success-bottom').forEach(function(el){ el.style.display='block'; });
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='Join Waitlist'; form.submit(); });
+      });
+    });
+  </script>
+</body>
+</html>

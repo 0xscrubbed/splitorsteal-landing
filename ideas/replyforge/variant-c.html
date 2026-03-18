@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReplyForge — Reddit Doesn't Hate Marketers. Reddit Hates Bad Marketers.</title>
+  <meta name="description" content="Most advice about Reddit marketing is wrong. The indie founders getting real customers from Reddit aren't avoiding self-promotion — they're doing it correctly. ReplyForge shows you how." />
+  <meta name="keywords" content="reddit marketing for startups, how to post on reddit without getting banned, indie founder reddit strategy, reddit customer acquisition" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="author" content="0xscrubbed" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/replyforge/variant-c.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ReplyForge — Reddit Doesn't Hate Marketers. It Hates Bad Ones." />
+  <meta property="og:description" content="The indie founders getting customers from Reddit aren't avoiding self-promotion. They're doing it right. ReplyForge teaches the system." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/replyforge/variant-c.html" />
+  <meta property="og:site_name" content="ReplyForge" />
+  <meta property="og:image" content="https://0xscrubbed.xyz/avatar.webp" />
+  <meta property="og:locale" content="en_AU" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ReplyForge — Reddit Doesn't Hate Marketers. It Hates Bad Ones." />
+  <meta name="twitter:description" content="Stop getting banned on Reddit. Start getting customers. The real system." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ReplyForge","description":"Reddit marketing system for indie founders and solo builders. Get discovered without getting banned.","url":"https://0xscrubbed.xyz/ideas/replyforge/","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/PreOrder"},"author":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0500;
+      --bg-elevated: #130800;
+      --bg-card: #1a0c00;
+      --bg-card-hover: #221200;
+      --text: #f5ede0;
+      --text-muted: #a08060;
+      --text-dim: #5a4030;
+      --accent: #f97316;
+      --accent-glow: rgba(249, 115, 22, 0.2);
+      --accent-hover: #fb923c;
+      --accent-subtle: rgba(249, 115, 22, 0.1);
+      --success: #10e5a0;
+      --border: #2a1600;
+      --border-subtle: #1a0e00;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --max-width: 760px;
+      --transition: 0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13, 5, 0, 0.93); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 800; font-size: 1.05rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.65rem; letter-spacing: -0.02em;
+    }
+    .nav-cta {
+      padding: 0.5rem 1.25rem; background: var(--accent); color: #fff;
+      border: none; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background var(--transition);
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -15%; left: 50%;
+      transform: translateX(-50%); width: 800px; height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .badge {
+      display: inline-block; background: var(--accent-subtle); color: var(--accent);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.4em 1.2em; border-radius: 100px; border: 1px solid rgba(249,115,22,0.3);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.08;
+      max-width: 700px; margin-bottom: 1.25rem; letter-spacing: -0.03em;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero .subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--text-muted);
+      max-width: 540px; margin-bottom: 1.5rem; line-height: 1.65;
+    }
+
+    .contrast-block {
+      display: flex; gap: 1rem; max-width: 580px; margin-bottom: 2rem; width: 100%;
+    }
+    .contrast-col { flex: 1; border-radius: var(--radius); padding: 1.25rem; }
+    .contrast-col.bad { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); }
+    .contrast-col.good { background: var(--accent-subtle); border: 1px solid rgba(249,115,22,0.25); }
+    .contrast-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .contrast-col.bad h4 { color: #f87171; }
+    .contrast-col.good h4 { color: var(--accent); }
+    .contrast-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .contrast-col li { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+
+    @media (max-width: 480px) { .contrast-block { flex-direction: column; } }
+
+    .capture-form {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      width: 100%; max-width: 420px;
+    }
+    .capture-form input[type="email"] {
+      width: 100%; padding: 0.9rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text);
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .capture-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .capture-form button {
+      width: 100%; padding: 1rem; border: none; border-radius: var(--radius);
+      background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background var(--transition), transform 0.1s;
+    }
+    .capture-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.8rem; color: var(--text-dim); text-align: center; }
+
+    .social-proof {
+      margin-top: 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .scarcity { margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem 2rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius); max-width: 420px;
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    section { padding: 5rem 0; }
+    section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+    .truths-section { background: var(--bg-elevated); }
+    .truth-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .truth-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .truth-mark { font-size: 1.2rem; flex-shrink: 0; }
+    .truth-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .truth-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    .features { background: var(--bg); }
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 540px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .feature-card:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+    .feature-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent-subtle); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+
+    .bottom-cta { text-align: center; background: var(--bg-elevated); }
+    .bottom-cta h2 { margin-bottom: 0.75rem; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-form { margin: 0 auto; }
+
+    footer {
+      text-align: center; padding: 2.5rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) { .hero { padding-top: 5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="https://0xscrubbed.xyz/ideas/replyforge/" aria-label="ReplyForge home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M4 20L10 14H4V6h20v8H12l-8 6z" fill="#f97316" stroke="#f97316" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      <span>ReplyForge</span>
+    </a>
+    <a class="nav-cta" href="#form-area">Get Early Access</a>
+  </nav>
+
+  <section class="hero" role="banner">
+    <span class="badge">Contrarian Reddit Playbook</span>
+
+    <h1>Reddit Doesn't Hate Marketers.<br>Reddit Hates <em>Bad</em> Marketers.</h1>
+    <p class="subheadline">The conventional wisdom — "don't promote on Reddit" — is wrong. The founders getting real customers from Reddit aren't avoiding promotion. They've learned to do it in a way Reddit actually rewards.</p>
+
+    <div class="contrast-block" aria-label="What works vs what doesn't on Reddit">
+      <div class="contrast-col bad">
+        <h4>What gets banned</h4>
+        <ul>
+          <li>Drop link, no context</li>
+          <li>Lead with the product</li>
+          <li>Same reply across subs</li>
+          <li>Ignore the actual question</li>
+        </ul>
+      </div>
+      <div class="contrast-col good">
+        <h4>What gets customers</h4>
+        <ul>
+          <li>Answer the question first</li>
+          <li>Mention product when relevant</li>
+          <li>Sub-specific tone and framing</li>
+          <li>Build rep before converting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="form-area">
+      <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+        <input type="hidden" name="idea_slug" value="replyforge" />
+        <input type="hidden" name="variant" value="c" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+        <button type="submit">Learn the System — Get Early Access</button>
+        <p class="form-note">Free to join. No spam, ever.</p>
+      </form>
+    </div>
+    <div id="form-success" class="form-success" role="status" aria-live="polite">
+      <h3>You're on the list.</h3>
+      <p>We'll be in touch when ReplyForge is ready.</p>
+    </div>
+
+    <div class="social-proof">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Joined by <strong>indie founders building in public</strong></span>
+    </div>
+    <p class="scarcity">Only 25 early access spots remaining</p>
+  </section>
+
+  <section class="truths-section">
+    <div class="container">
+      <h2>Uncomfortable Truths About Reddit Marketing</h2>
+      <div class="truth-list">
+        <div class="truth-item">
+          <div class="truth-mark">01</div>
+          <div>
+            <h3>Reddit mods don't ban products — they ban spam</h3>
+            <p>The removal isn't about what you're selling. It's about how you showed up. A well-written reply that genuinely helps someone, written by an account with history in that community, almost never gets removed — even when it mentions a product.</p>
+          </div>
+        </div>
+        <div class="truth-item">
+          <div class="truth-mark">02</div>
+          <div>
+            <h3>The founders winning on Reddit aren't posting less — they're posting smarter</h3>
+            <p>They're posting 5-10 times more frequently than the average founder. But every reply starts with the question, not the product. The volume comes from monitoring the right threads — something you can systematise.</p>
+          </div>
+        </div>
+        <div class="truth-item">
+          <div class="truth-mark">03</div>
+          <div>
+            <h3>Reddit traffic converts better than most paid acquisition channels</h3>
+            <p>Reddit visitors who come via a genuine recommendation in a thread they were already reading arrive with intent and trust pre-built. The conversion rate on Reddit-referred traffic consistently outperforms cold ad traffic — if the referral is authentic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>ReplyForge: The System Behind the Results</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Thread monitoring</strong> — surface the posts where your product is the right answer, before they age off the front page.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><p><strong>Reply drafting</strong> — AI-generated replies that answer first, sub-specific in tone, with optional product mention when it fits naturally.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 8l-5 5-3-3-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><p><strong>Conversion tracking</strong> — see which subreddits, reply styles, and topics drive actual signups so you can double down on what works.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>Account reputation tools</strong> — manage karma cadence and sub history so your account looks like a real community member, not a promotional sockpuppet.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Your Customers Are on Reddit. Go Get Them.</h2>
+      <p>ReplyForge gives you the system, not just the theory. Join the waitlist for early access.</p>
+      <div id="form-area-bottom">
+        <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+          <input type="hidden" name="idea_slug" value="replyforge" />
+          <input type="hidden" name="variant" value="c" />
+          <input type="hidden" name="utm_source" value="lander_bottom" />
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+          <button type="submit">Get Early Access</button>
+          <p class="form-note">Free to join. No spam, ever.</p>
+        </form>
+      </div>
+      <div id="form-success-bottom" class="form-success" role="status" aria-live="polite">
+        <h3>You're on the list.</h3>
+        <p>We'll reach out when ReplyForge is ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://0xscrubbed.xyz">Home</a>
+      <a href="https://0xscrubbed.xyz/ideas/">All Ideas</a>
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">X / Twitter</a>
+    </nav>
+    <p>Built by <a href="https://0xscrubbed.xyz">@0xscrubbed</a> &middot; Independent builder, Australia</p>
+    <p style="margin-top:0.35rem">&copy; 2026 0xscrubbed &middot; ABN 15 381 436 058</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.capture-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button');
+        btn.disabled = true; btn.textContent = 'Joining...';
+        var data = new FormData(form);
+        fetch(form.action, { method: 'POST', body: data })
+          .then(function(r) { return r.json().catch(function(){return{}}) })
+          .then(function() {
+            document.querySelectorAll('#form-area,#form-area-bottom').forEach(function(el){ el.style.display='none'; });
+            document.querySelectorAll('#form-success,#form-success-bottom').forEach(function(el){ el.style.display='block'; });
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='Get Early Access'; form.submit(); });
+      });
+    });
+  </script>
+</body>
+</html>

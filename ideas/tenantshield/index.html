@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TenantShield — Australian Renters Know Their Rights. Do You?</title>
+  <meta name="description" content="Join 340+ Australian renters using TenantShield to understand their rights, draft legal notices, and win disputes with landlords and property managers." />
+  <meta name="keywords" content="australian renters rights app, tenant rights australia, rental dispute australia, bond refund australia, notice to landlord" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="author" content="0xscrubbed" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/tenantshield/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TenantShield — Know Your Rights. Draft the Right Notice. Win." />
+  <meta property="og:description" content="340+ Australian renters already using TenantShield to fight unfair landlords and win their bond back." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/tenantshield/" />
+  <meta property="og:site_name" content="TenantShield" />
+  <meta property="og:image" content="https://0xscrubbed.xyz/avatar.webp" />
+  <meta property="og:locale" content="en_AU" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TenantShield — Know Your Rights. Win." />
+  <meta name="twitter:description" content="Australian renters rights app. Understand your rights, draft notices, dispute unfair charges." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"TenantShield","description":"Australian renters rights app. Understand your rights, draft legal notices, and resolve disputes with landlords and property managers.","url":"https://0xscrubbed.xyz/ideas/tenantshield/","applicationCategory":"LifestyleApplication","operatingSystem":"iOS, Android","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","availability":"https://schema.org/PreOrder"},"author":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is TenantShield?","acceptedAnswer":{"@type":"Answer","text":"TenantShield is an app for Australian renters that explains your legal rights in plain English, helps you draft formal notices and dispute letters, and guides you through the VCAT, NCAT, or state tribunal process."}},{"@type":"Question","name":"Can my landlord legally keep my bond?","acceptedAnswer":{"@type":"Answer","text":"Only if they can prove damage beyond fair wear and tear. TenantShield helps you understand what counts as fair wear and tear in your state, document your exit condition, and dispute any unlawful deductions."}},{"@type":"Question","name":"Which states does TenantShield cover?","acceptedAnswer":{"@type":"Answer","text":"TenantShield covers all Australian states and territories — NSW, VIC, QLD, WA, SA, TAS, ACT and NT — with legislation specific to your jurisdiction."}},{"@type":"Question","name":"Is TenantShield legal advice?","acceptedAnswer":{"@type":"Answer","text":"TenantShield provides legal information and document drafting tools, not formal legal advice. For complex disputes, we recommend consulting a tenancy lawyer or community legal centre."}},{"@type":"Question","name":"When is TenantShield available?","acceptedAnswer":{"@type":"Answer","text":"TenantShield is currently in pre-launch. Join the waitlist to get early access and help shape the product."}}]}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050810;
+      --bg-elevated: #080c1a;
+      --bg-card: #0d1220;
+      --bg-card-hover: #131928;
+      --text: #e8edf5;
+      --text-muted: #7a8aaa;
+      --text-dim: #404e6a;
+      --accent: #1a4fcc;
+      --accent-red: #dc2626;
+      --accent-glow: rgba(26, 79, 204, 0.2);
+      --accent-hover: #1e5ce0;
+      --accent-subtle: rgba(26, 79, 204, 0.1);
+      --success: #10e5a0;
+      --border: #131c30;
+      --border-subtle: #0c1220;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --max-width: 760px;
+      --transition: 0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(5, 8, 16, 0.93); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 800; font-size: 1.05rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.65rem; letter-spacing: -0.02em;
+    }
+    .nav-cta {
+      padding: 0.5rem 1.25rem; background: var(--accent); color: #fff;
+      border: none; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background var(--transition);
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -15%; left: 50%;
+      transform: translateX(-50%); width: 800px; height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .testimonial-strip {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      margin-bottom: 2rem; width: 100%; max-width: 560px;
+    }
+    .testimonial {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.25rem;
+      text-align: left;
+    }
+    .testimonial .quote { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 0.5rem; }
+    .testimonial .quote strong { color: var(--text); }
+    .testimonial .author { font-size: 0.78rem; color: var(--text-dim); font-weight: 600; }
+
+    .badge {
+      display: inline-block; background: var(--accent-subtle); color: var(--accent);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 0.4em 1.2em; border-radius: 100px; border: 1px solid rgba(26,79,204,0.25);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem); font-weight: 900; line-height: 1.1;
+      max-width: 680px; margin-bottom: 1.25rem; letter-spacing: -0.03em;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero h1 .red { color: var(--accent-red); }
+    .hero .subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.15rem); color: var(--text-muted);
+      max-width: 500px; margin-bottom: 2.5rem; line-height: 1.65;
+    }
+
+    .capture-form {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      width: 100%; max-width: 420px;
+    }
+    .capture-form input[type="email"] {
+      width: 100%; padding: 0.9rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text);
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .capture-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .capture-form button {
+      width: 100%; padding: 1rem; border: none; border-radius: var(--radius);
+      background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background var(--transition), transform 0.1s;
+    }
+    .capture-form button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.8rem; color: var(--text-dim); text-align: center; }
+
+    .social-proof {
+      margin-top: 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .scarcity { margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent-red); font-weight: 600; }
+
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem 2rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius); max-width: 420px;
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    section { padding: 5rem 0; }
+    section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+    .features { background: var(--bg-elevated); }
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 540px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .feature-card:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+    .feature-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent-subtle); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+
+    .how-section { background: var(--bg); }
+    .steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+    .step { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .step-number {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem;
+    }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+    .faq-section { background: var(--bg-elevated); }
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .faq-item[open] { border-color: var(--accent); }
+    .faq-item summary {
+      padding: 1.25rem 1.5rem; cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-size: 1.25rem; color: var(--text-muted); }
+    .faq-item[open] summary::after { content: '×'; }
+    .faq-item summary h3 { font-size: 1rem; font-weight: 600; }
+    .faq-item p { padding: 0 1.5rem 1.25rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+    .bottom-cta { text-align: center; background: var(--bg); }
+    .bottom-cta h2 { margin-bottom: 0.75rem; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-form { margin: 0 auto; }
+
+    footer {
+      text-align: center; padding: 2.5rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) { .hero { padding-top: 5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="https://0xscrubbed.xyz/ideas/tenantshield/" aria-label="TenantShield home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 2L3 7v9c0 5.55 4.74 10.74 11 12 6.26-1.26 11-6.45 11-12V7L14 2z" fill="#1a4fcc" stroke="#1a4fcc" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>TenantShield</span>
+    </a>
+    <a class="nav-cta" href="#form-area">Join Waitlist</a>
+  </nav>
+
+  <section class="hero" role="banner">
+    <span class="badge">Australian Renters Rights App</span>
+
+    <div class="testimonial-strip" aria-label="Testimonials">
+      <div class="testimonial">
+        <p class="quote">"Got my full $3,200 bond back after my agent claimed <strong>'excessive cleaning'</strong>. Sent the notice from TenantShield and they dropped it immediately."</p>
+        <p class="author">— Sarah M., Melbourne VIC</p>
+      </div>
+      <div class="testimonial">
+        <p class="quote">"Landlord tried to enter without notice <strong>three times in a row</strong>. I had no idea that was illegal. TenantShield explained my rights and drafted the letter in 2 minutes."</p>
+        <p class="author">— James K., Brisbane QLD</p>
+      </div>
+    </div>
+
+    <h1>Know Your Rights.<br><em>Draft the Right Notice.</em><br><span class="red">Win.</span></h1>
+    <p class="subheadline">TenantShield gives Australian renters the legal knowledge and tools to handle landlord disputes — in plain English, specific to your state.</p>
+
+    <div id="form-area">
+      <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+        <input type="hidden" name="idea_slug" value="tenantshield" />
+        <input type="hidden" name="variant" value="a" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+        <button type="submit">Join Waitlist — Free</button>
+        <p class="form-note">Free during beta. No spam, ever.</p>
+      </form>
+    </div>
+    <div id="form-success" class="form-success" role="status" aria-live="polite">
+      <h3>You're in.</h3>
+      <p>We'll notify you when early access opens.</p>
+    </div>
+
+    <div class="social-proof">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>340+ Australian renters</strong> already on the waitlist</span>
+    </div>
+    <p class="scarcity">Only 25 early access spots remaining</p>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>What TenantShield Does For You</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>Know your rights by state</strong> — tenancy law is different in every state. TenantShield pulls the exact rules that apply to you in NSW, VIC, QLD, WA and more.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>Draft legal notices</strong> — formal breach notices, repair requests, bond dispute letters — generated in seconds, legally worded for your state.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Bond dispute guidance</strong> — understand what counts as fair wear and tear, challenge unlawful deductions, and escalate to VCAT/NCAT with confidence.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Repair escalation</strong> — know exactly when your landlord is legally required to fix something, and what notice to send if they don't.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Tribunal support</strong> — step-by-step guidance for filing with VCAT, NCAT, RTA, or your state's tenancy tribunal — without a lawyer.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 7h6M9 11h6M9 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Plain English explanations</strong> — every law, regulation and right explained without legal jargon, so you know exactly where you stand.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Tell Us Your Situation</h3>
+            <p>Select your state and describe what's happening — bond dispute, landlord entry, repairs not done, or notice to vacate. TenantShield identifies the relevant laws immediately.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Know Exactly Where You Stand</h3>
+            <p>Plain English summary of your rights, what your landlord can and can't do, and what the legal next steps are — based on the legislation that applies to your tenancy.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Draft Your Notice or Letter</h3>
+            <p>Generate a legally worded notice in seconds. Download as PDF, send directly, or escalate to your state tribunal if needed. Full paper trail included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary><h3>What is TenantShield?</h3></summary>
+          <p>TenantShield is an app for Australian renters that explains your legal rights in plain English, helps you draft formal notices and dispute letters, and guides you through the VCAT, NCAT, or state tribunal process.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>Can my landlord legally keep my bond?</h3></summary>
+          <p>Only if they can prove damage beyond fair wear and tear. TenantShield helps you understand what counts as fair wear and tear in your state, document your exit condition, and dispute any unlawful deductions.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>Which states does TenantShield cover?</h3></summary>
+          <p>TenantShield covers all Australian states and territories — NSW, VIC, QLD, WA, SA, TAS, ACT and NT — with legislation specific to your jurisdiction.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>Is TenantShield legal advice?</h3></summary>
+          <p>TenantShield provides legal information and document drafting tools, not formal legal advice. For complex disputes, we recommend consulting a tenancy lawyer or community legal centre.</p>
+        </details>
+        <details class="faq-item">
+          <summary><h3>When is TenantShield available?</h3></summary>
+          <p>TenantShield is currently in pre-launch. Join the waitlist to get early access and help shape the product.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Your Landlord Knows the Rules. Now You Will Too.</h2>
+      <p>340+ Australian renters are already on the waitlist. Join them before early access fills.</p>
+      <div id="form-area-bottom">
+        <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+          <input type="hidden" name="idea_slug" value="tenantshield" />
+          <input type="hidden" name="variant" value="a" />
+          <input type="hidden" name="utm_source" value="lander_bottom" />
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+          <button type="submit">Join Waitlist — Free</button>
+          <p class="form-note">Free during beta. No spam, ever.</p>
+        </form>
+      </div>
+      <div id="form-success-bottom" class="form-success" role="status" aria-live="polite">
+        <h3>You're in.</h3>
+        <p>We'll be in touch when early access opens.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://0xscrubbed.xyz">Home</a>
+      <a href="https://0xscrubbed.xyz/ideas/">All Ideas</a>
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">X / Twitter</a>
+    </nav>
+    <p>Built by <a href="https://0xscrubbed.xyz">@0xscrubbed</a> &middot; Independent builder, Australia</p>
+    <p style="margin-top:0.35rem">&copy; 2026 0xscrubbed &middot; ABN 15 381 436 058</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.capture-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button');
+        btn.disabled = true; btn.textContent = 'Joining...';
+        var data = new FormData(form);
+        fetch(form.action, { method: 'POST', body: data })
+          .then(function(r) { return r.json().catch(function(){return{}}) })
+          .then(function() {
+            document.querySelectorAll('#form-area,#form-area-bottom').forEach(function(el){ el.style.display='none'; });
+            document.querySelectorAll('#form-success,#form-success-bottom').forEach(function(el){ el.style.display='block'; });
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='Join Waitlist — Free'; form.submit(); });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TenantShield — Most Australian Renters Are Being Ripped Off and Don't Know It</title>
+  <meta name="description" content="Australian landlords exploit legal ignorance as a business model. TenantShield ends that. Know your rights, draft notices, fight back." />
+  <meta name="keywords" content="australian renters rights app, tenant rights australia, rental dispute australia, bond refund australia, unfair landlord australia" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="author" content="0xscrubbed" />
+  <link rel="canonical" href="https://0xscrubbed.xyz/ideas/tenantshield/variant-c.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TenantShield — Australian Landlords Exploit Legal Ignorance. It Ends Now." />
+  <meta property="og:description" content="Most Australian renters don't dispute unfair charges because they don't know they can win. TenantShield changes that." />
+  <meta property="og:url" content="https://0xscrubbed.xyz/ideas/tenantshield/variant-c.html" />
+  <meta property="og:site_name" content="TenantShield" />
+  <meta property="og:image" content="https://0xscrubbed.xyz/avatar.webp" />
+  <meta property="og:locale" content="en_AU" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TenantShield — Landlords Count on You Not Knowing Your Rights" />
+  <meta name="twitter:description" content="Australian renters rights app. Fight unfair deductions. Win." />
+  <meta name="twitter:creator" content="@0xscrubbed" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"TenantShield","description":"Australian renters rights app. Understand your rights, draft legal notices, and resolve disputes with landlords and property managers.","url":"https://0xscrubbed.xyz/ideas/tenantshield/","applicationCategory":"LifestyleApplication","operatingSystem":"iOS, Android","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","availability":"https://schema.org/PreOrder"},"author":{"@type":"Organization","name":"0xscrubbed","url":"https://0xscrubbed.xyz"}}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050810;
+      --bg-elevated: #080c1a;
+      --bg-card: #0d1220;
+      --bg-card-hover: #131928;
+      --text: #e8edf5;
+      --text-muted: #7a8aaa;
+      --text-dim: #404e6a;
+      --accent: #1a4fcc;
+      --accent-red: #dc2626;
+      --accent-glow: rgba(26, 79, 204, 0.2);
+      --accent-hover: #1e5ce0;
+      --accent-subtle: rgba(26, 79, 204, 0.1);
+      --success: #10e5a0;
+      --border: #131c30;
+      --border-subtle: #0c1220;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --max-width: 760px;
+      --transition: 0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(5, 8, 16, 0.93); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 800; font-size: 1.05rem; color: var(--text);
+      text-decoration: none; display: flex; align-items: center; gap: 0.65rem; letter-spacing: -0.02em;
+    }
+    .nav-cta {
+      padding: 0.5rem 1.25rem; background: var(--accent-red); color: #fff;
+      border: none; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background var(--transition);
+    }
+    .nav-cta:hover { background: #b91c1c; }
+
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -15%; left: 50%;
+      transform: translateX(-50%); width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(220,38,38,0.1) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .alert-banner {
+      background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.3);
+      border-radius: var(--radius); padding: 0.85rem 1.25rem;
+      font-size: 0.88rem; color: #fca5a5; font-weight: 600;
+      margin-bottom: 1.75rem; max-width: 560px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.08;
+      max-width: 680px; margin-bottom: 1.5rem; letter-spacing: -0.03em;
+    }
+    .hero h1 em { color: var(--accent-red); font-style: normal; }
+    .hero .subheadline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--text-muted);
+      max-width: 520px; margin-bottom: 1.5rem; line-height: 1.65;
+    }
+
+    .bold-claim {
+      background: var(--bg-card); border: 1px solid rgba(220,38,38,0.25);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      max-width: 520px; margin-bottom: 2rem; text-align: left;
+    }
+    .bold-claim p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; }
+    .bold-claim strong { color: var(--text); }
+
+    .capture-form {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      width: 100%; max-width: 420px;
+    }
+    .capture-form input[type="email"] {
+      width: 100%; padding: 0.9rem 1.25rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-card); color: var(--text);
+      font-size: 0.95rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .capture-form input:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px rgba(220,38,38,0.15); }
+    .capture-form button {
+      width: 100%; padding: 1rem; border: none; border-radius: var(--radius);
+      background: var(--accent-red); color: #fff; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background var(--transition), transform 0.1s;
+    }
+    .capture-form button:hover { background: #b91c1c; transform: translateY(-1px); }
+    .capture-form button:active { transform: translateY(0); }
+    .form-note { font-size: 0.8rem; color: var(--text-dim); text-align: center; }
+
+    .social-proof {
+      margin-top: 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .scarcity { margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent-red); font-weight: 600; }
+
+    .form-success {
+      display: none; text-align: center; padding: 1.5rem 2rem;
+      background: var(--bg-card); border: 1px solid var(--success);
+      border-radius: var(--radius); max-width: 420px;
+    }
+    .form-success h3 { color: var(--success); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
+
+    section { padding: 5rem 0; }
+    section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+    .claims-section { background: var(--bg-elevated); }
+    .claim-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .claim-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .claim-num { font-size: 1.4rem; font-weight: 900; color: var(--accent-red); flex-shrink: 0; line-height: 1.2; }
+    .claim-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .claim-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    .solution-section { background: var(--bg); }
+    .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 540px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .feature-card:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+    .feature-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent-subtle); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+
+    .bottom-cta { text-align: center; background: var(--bg-elevated); }
+    .bottom-cta h2 { margin-bottom: 0.75rem; }
+    .bottom-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .bottom-cta .capture-form { margin: 0 auto; }
+
+    footer {
+      text-align: center; padding: 2.5rem 1.5rem;
+      font-size: 0.8rem; color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) { .hero { padding-top: 5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="https://0xscrubbed.xyz/ideas/tenantshield/" aria-label="TenantShield home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 2L3 7v9c0 5.55 4.74 10.74 11 12 6.26-1.26 11-6.45 11-12V7L14 2z" fill="#1a4fcc" stroke="#1a4fcc" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>TenantShield</span>
+    </a>
+    <a class="nav-cta" href="#form-area">Fight Back</a>
+  </nav>
+
+  <section class="hero" role="banner">
+    <div class="alert-banner" role="alert">
+      Renters lose an estimated $2.1B annually to disputes they could have won — but didn't challenge.
+    </div>
+
+    <h1>Most Australian Renters<br>Are Being <em>Ripped Off</em><br>and Don't Know It.</h1>
+    <p class="subheadline">Unfair bond deductions. Illegal landlord entry. Repairs ignored for months. This isn't bad luck — it's a system that profits from your legal ignorance.</p>
+
+    <div class="bold-claim">
+      <p>The average property manager handles <strong>hundreds of tenancies</strong>. They know exactly what renters will accept without pushing back. They know most renters don't know their rights. They count on it.</p>
+    </div>
+
+    <div id="form-area">
+      <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+        <input type="hidden" name="idea_slug" value="tenantshield" />
+        <input type="hidden" name="variant" value="c" />
+        <input type="hidden" name="utm_source" value="lander" />
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+        <button type="submit">I Want to Know My Rights</button>
+        <p class="form-note">Free during beta. No spam, ever.</p>
+      </form>
+    </div>
+    <div id="form-success" class="form-success" role="status" aria-live="polite">
+      <h3>You're in.</h3>
+      <p>We'll notify you when early access opens.</p>
+    </div>
+
+    <div class="social-proof">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>340+ Australian renters</strong> already on the waitlist</span>
+    </div>
+    <p class="scarcity">Only 25 early access spots remaining</p>
+  </section>
+
+  <section class="claims-section">
+    <div class="container">
+      <h2>Three Things Your Landlord Hopes You Never Learn</h2>
+      <div class="claim-list">
+        <div class="claim-item">
+          <div class="claim-num">01</div>
+          <div>
+            <h3>Most bond deductions are unlawful — and disputable</h3>
+            <p>"Cleaning fees" and "damage" charges are routinely applied beyond what the law permits. When tenants dispute them at tribunal, they win the majority of the time. The problem is most renters never dispute.</p>
+          </div>
+        </div>
+        <div class="claim-item">
+          <div class="claim-num">02</div>
+          <div>
+            <h3>Your landlord entering without notice is a breach of the law</h3>
+            <p>In every Australian state, landlords must provide written notice (24–48 hours minimum depending on state) before entering your rental. Surprise entry without notice is a breach you can act on immediately — most renters have no idea.</p>
+          </div>
+        </div>
+        <div class="claim-item">
+          <div class="claim-num">03</div>
+          <div>
+            <h3>Landlords have legal repair obligations with hard deadlines</h3>
+            <p>Urgent repairs (no hot water, broken heating, structural danger) must be fixed within 24 hours in most states. Non-urgent repairs within 14 days. Ignoring these obligations gives you the legal right to break your lease or seek compensation — and most landlords count on you not knowing that.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section" id="features">
+    <div class="container">
+      <h2>TenantShield: Your Rights. In Your Hands.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>State-specific rights</strong> — exact laws that apply to your tenancy in NSW, VIC, QLD, WA, SA, TAS, ACT and NT.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div><p><strong>Legal notice generator</strong> — breach notices, repair requests, bond dispute letters — legally worded, ready to send in minutes.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div><p><strong>Tribunal escalation</strong> — step-by-step process to take your dispute to VCAT, NCAT, RTA or your state tribunal without a lawyer.</p></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><p><strong>Plain English explanations</strong> — no legal jargon. Know exactly where you stand and what you can do about it.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div class="container">
+      <h2>Stop Accepting Charges You Don't Have to Pay</h2>
+      <p>TenantShield puts Australian tenancy law in your pocket. Know your rights before your next dispute.</p>
+      <div id="form-area-bottom">
+        <form class="capture-form" action="https://capture.0xscrubbed.xyz/signup" method="POST">
+          <input type="hidden" name="idea_slug" value="tenantshield" />
+          <input type="hidden" name="variant" value="c" />
+          <input type="hidden" name="utm_source" value="lander_bottom" />
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+          <button type="submit">I Want to Know My Rights</button>
+          <p class="form-note">Free during beta. No spam, ever.</p>
+        </form>
+      </div>
+      <div id="form-success-bottom" class="form-success" role="status" aria-live="polite">
+        <h3>You're in.</h3>
+        <p>We'll be in touch when early access opens.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://0xscrubbed.xyz">Home</a>
+      <a href="https://0xscrubbed.xyz/ideas/">All Ideas</a>
+      <a href="https://x.com/0xscrubbed" target="_blank" rel="noopener">X / Twitter</a>
+    </nav>
+    <p>Built by <a href="https://0xscrubbed.xyz">@0xscrubbed</a> &middot; Independent builder, Australia</p>
+    <p style="margin-top:0.35rem">&copy; 2026 0xscrubbed &middot; ABN 15 381 436 058</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.capture-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button');
+        btn.disabled = true; btn.textContent = 'Joining...';
+        var data = new FormData(form);
+        fetch(form.action, { method: 'POST', body: data })
+          .then(function(r) { return r.json().catch(function(){return{}}) })
+          .then(function() {
+            document.querySelectorAll('#form-area,#form-area-bottom').forEach(function(el){ el.style.display='none'; });
+            document.querySelectorAll('#form-success,#form-success-bottom').forEach(function(el){ el.style.display='block'; });
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='I Want to Know My Rights'; form.submit(); });
+      });
+    });
+  </script>
+</body>
+</html>
